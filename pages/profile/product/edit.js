@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { stripBasename } from "react-router/lib/router";
+// import { stripBasename } from "react-router/lib/router";
 
 const Edit = () => {
   // const [name, setName] = useState("");
