@@ -1,28 +1,43 @@
-import { NavbarProfile } from "../../components/navbar";
 import Card from "../../components/seller/card";
 import CardList from "../../components/seller/cardlist";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 
 const DaftarJual = () => {
-  const [products, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   //memanggil func getproducts
   useEffect(() => {
     getProducts();
   }, []);
 
+  //memanggil func getproducts
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   // fetch data api
   const getProducts = async () => {
-    const response = await axios.get("http://localhost:3000/");
-    // console.log(response.data);
-    setProduct(response.data);
+    try {
+      const response = await axios.get("http://localhost:5000/api/v1/product");
+      console.log(response.data);
+      setProducts(response.data.data);
+    } catch (err) {}
+  };
+
+  // fetch data api
+  const getUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/v1/users");
+      console.log(response.data);
+      setUsers(response.data.data);
+    } catch (err) {}
   };
 
   return (
     <div>
-      <NavbarProfile></NavbarProfile>
       {/* <Header /> */}
       <div id="daftarjual" className="container content position-relative">
         <div className="row">
@@ -42,12 +57,18 @@ const DaftarJual = () => {
                   ></img>
                 </div>
                 <div className="profile-name d-inline">
-                  Nama Penjual
+                  {users.length == 0 ? "loading" : users[0].name}
                   <br />
-                  <font className="profile-kota ">Kota</font>
+                  <font className="profile-kota ">
+                    {users.length == 0 ? "loading" : users[0].city}
+                  </font>
                 </div>
                 <div className="profile-button d-inline float-end mt-2">
-                  <Link href={`/profile/edit/${products.id}`}>
+                  <Link
+                    href={`/profile/edit/${
+                      users.length == 0 ? "loading" : users[0].id
+                    }`}
+                  >
                     <button type="button" className="btn btn-outline-dark">
                       Edit
                     </button>
@@ -90,26 +111,34 @@ const DaftarJual = () => {
                 </button>
               </Link>
             </div>
-            {/* {products.map((product, index) => (
-              <div className="card-item">
-                <Card />
-              </div>
-            ))} */}
-            <div className="card-item">
-              <Card />
-            </div>
-            <div className="card-item">
-              <Card />
-            </div>
-            <div className="card-item">
-              <Card />
-            </div>
-            <div className="card-item">
-              <Card />
-            </div>
-            <div className="card-item">
-              <Card />
-            </div>
+            {products.length == 0
+              ? "loading"
+              : products.map((product) => (
+                  <div className="card-item" key={product.id}>
+                    <div
+                      id="cardSell"
+                      className="card"
+                      style={{ width: "18rem" }}
+                    >
+                      <img
+                        src={product.Images[0].product_img}
+                        className="card-img-top"
+                        alt="..."
+                      ></img>
+                      <div className="card-body">
+                        <p className="card-text name-p">
+                          {product.product_name}
+                        </p>
+                        <p className="card-text type-p">
+                          {product.product_type}
+                        </p>
+                        <p className="card-text price-p">
+                          {product.product_price}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
