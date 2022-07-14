@@ -414,14 +414,14 @@ a {
 
 }
 
-.container {
+/* .container {
   width:100%;
   position:absolute;
   top: 50%;
   transform: translateY(-50%);
   text-align:center;
   color: #343434;
-}
+} */
 .not-found1 {
   margin:0;
   text-align:center
@@ -436,15 +436,27 @@ a {
   letter-spacing: 20px;
   background:url(../public/images/img2.jpg);
   -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  
-  
+  /* -webkit-background-clip: text; */
 }
 
 .not-found3 {
   margin:0;
   text-align:center;
   font-weight: 500;
+}
+
+/* info penawar fadil */
+
+.logo{
+  margin-bottom: 35px !important;
+}
+.spacing{
+  margin-top: 100px !important;
+  margin-bottom: 100px !important;
+}
+.seller_img{
+  width: 40px;
+  height: 40px;
 }
 
 

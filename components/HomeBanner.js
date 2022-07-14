@@ -12,7 +12,7 @@ const imageBanner = [
 export default function HomeBanner() {
   return (
     <>
-      <Container className={styles.container}>
+      <Container className="p-5 mt-5">
         <Carousel>
           {imageBanner.map((a) => (
             // eslint-disable-next-line react/jsx-key
