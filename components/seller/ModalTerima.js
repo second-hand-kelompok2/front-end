@@ -29,7 +29,7 @@ function ModalTerima() {
           <div className="card-body">
             <h4 className="text-center mb-4">Product Match</h4>
             <p className="d-flex">
-              <img src='./images/sample_profile_small.png' className='me-4 mb-4'/>
+              <img src='../images/sample_profile_small.png' className='me-4 mb-4'/>
               <div>
                 <h4>
                   Nama Pembeli
@@ -40,24 +40,26 @@ function ModalTerima() {
               </div>
             </p>
             <p className="d-flex">
-              <img src='./images/sample_profile_small.png' className='me-4 mb-5 mt-0'/>
+              <img src='../images/sample_profile_small.png' className='me-4 mb-5 mt-0'/>
               <div>
-                <h4>
+                <h5>
                   Jam Tangan Casio
-                </h4>
-                <h4>
-                  Rp 250.000
-                </h4>
-                <h4>
+                </h5>
+                <h5>
+                  <strike>
+                    Rp 250.000
+                  </strike>
+                </h5>
+                <h5>
                   Ditawar Rp 200.000
-                </h4>
+                </h5>
               </div>
             </p>
           </div>
           <div className='buton mt-3'>
             <button type="button" className='btn text-white' onClick={handleClose}>
               Hubungi via Whatsapp
-              <img src="./images/Whatsapp.png"></img>
+              <img src="../images/Whatsapp.png"></img>
             </button>
           </div>
       </Modal.Body>

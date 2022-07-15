@@ -43,7 +43,7 @@ export const NavNoLogin = () => {
             </Form.Group>
           </div>
           <div>
-            <Button href="" className={styles.btn}>
+            <Button href="/login" className={styles.btn}>
               <img src="/images/fi_log-in.png" alt="icon" width="23px" height="23px"/>
               <p className={styles.txt}>Masuk</p>
             </Button>
