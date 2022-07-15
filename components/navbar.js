@@ -2,15 +2,15 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import React from "react";
+import Toast from 'react-bootstrap/Toast';
+import React, { useState } from 'react';
 
 export function NavbarDefault() {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
                 <Button variant="outline-light" href="/" className='me-5'>
-                    <img src="images/navbar.png"></img>
+                    <img src="../images/navbar.png"></img>
                 </Button>
             </Container>
         </Navbar>
@@ -58,6 +58,9 @@ export function NavbarInfoPenawar() {
 }
 
 export function NavbarProfile() {
+    const [show, setShow] = useState(true);
+
+    const toggleShow = () => setShow(!show);
 	return (
 		<Navbar className="box-shadow " bg="light" expand="lg">
 			<Container>
@@ -153,9 +156,29 @@ export function NavbarProfile() {
                         <Button variant="outline-light" href="#">
                             <img src="../images/fi_list.png"></img>
                         </Button>
-                        <Button variant="outline-light" href="#">
-                            <img src="../images/fi_bell.png"></img>
-                        </Button>
+                        <div>
+                            <Button variant="outline-light" onClick={toggleShow}>
+                                <img src="../images/fi_bell.png"></img>
+                            </Button>
+                            <div className='ToastContainer'>
+                                <Toast className='Toast' onClose={() => setShow(false)} show={show}>
+                                    <Toast.Body>
+                                        Woohoo, Belum ada notifikasi !!
+                                    </Toast.Body>
+                                </Toast>            
+                            </div>
+                            <style jsx>{`
+                                .ToastContainer {
+                                    max-width: 500px;
+                                    position: absolute;
+                                    margin-left: -300px;
+                                }
+                                .Toast {
+                                    background-color: #ffffff;
+                                    border-radius: 25px;
+                                }
+                            `}</style>
+                        </div>
                         <Button variant="outline-light" href="#">
                             <img src="../images/fi_user.png"></img>
                         </Button>

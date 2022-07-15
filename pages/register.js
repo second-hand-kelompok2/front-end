@@ -1,15 +1,38 @@
 import { Col, Row, Image, Form, Button } from "react-bootstrap";
 import Link from "next/link";
 import { RegisterImage } from "../components";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Register = () => {
+  const { handleSubmit } = useForm();
+  const onSubmit = async (data) => {
+    const { namaLengkap, email, password } = data;
+    const res = await axios
+      .post("https://secondhand-catchy.herokuapp.com/api/v1/users/register", {
+        namaLengkap,  
+        email,
+        password,
+      })
+      .then((val) => {
+        toast.success("Register Success", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+  };
   return (
     <Row>
       <RegisterImage />
       <Col md={6} className="my-auto">
         <div className="mx-auto w-75">
           <h1 className="fw-bold">Daftar</h1>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group controlId="name" className="mt-3">
               <Form.Label>Nama</Form.Label>
               <Form.Control type="text" placeholder="Nama Lengkap" className="custom-rounded p-2" />
