@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "../../../services";
 import { useRouter } from "next/router";
+// import _ from "lodash";
 
 const Add = () => {
   // const router = useRouter();
@@ -11,75 +12,76 @@ const Add = () => {
   const [location, setLocation] = useState("");
   const [status, setStatus] = useState("");
 
-  const [fileInputState, setFileInputState] = useState("");
-  const [previewSource, setPreviewSource] = useState("");
-  const [selectedFile, setSelectedFile] = useState();
+  const [fileInputState, setFileInputState] = useState([]);
+  const [previewSource, setPreviewSource] = useState([]);
+
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    previewFile(file);
+    const { files } = e.target;
+    const validImageFiles = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      validImageFiles.push(file);
+    }
+    if (validImageFiles.length) {
+      setFileInputState(validImageFiles);
+      return;
+    }
   };
 
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    // konvert to url
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
+  useEffect(() => {
+    const previewSource = [],
+      fileReaders = [];
+    let isCancel = false;
+    if (fileInputState.length) {
+      fileInputState.forEach((file) => {
+        const fileReader = new FileReader();
+        fileReaders.push(fileReader);
+        fileReader.onload = (e) => {
+          const { result } = e.target;
+          if (result) {
+            previewSource.push(result);
+          }
+          if (previewSource.length === fileInputState.length && !isCancel) {
+            setPreviewSource(previewSource);
+          }
+        };
+        fileReader.readAsDataURL(file);
+      });
+    }
+    return () => {
+      isCancel = true;
+      fileReaders.forEach((fileReader) => {
+        if (fileReader.readyState === 1) {
+          fileReader.abort();
+        }
+      });
     };
-  };
+  }, [fileInputState]);
 
   const handleSubmitFile = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("product_name", name);
+    formData.append("product_category", category);
+    formData.append("product_desc", desc);
+    formData.append("product_price", price);
+    Object.values(fileInputState).forEach((file) => {
+      formData.append("product_img", file);
+    });
+    const token = window.localStorage.getItem("token");
+
     try {
-      await API.post("/product/add", {
-        product_name: name,
-        product_category: category,
-        product_desc: desc,
-        product_price: price,
+      await API.post("/product/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: token,
+        },
       });
     } catch (error) {
       console.log(error);
     }
-    if (!previewSource) return;
-    uploadImage(previewSource);
-    //   router.push("/profile");
   };
 
-  const uploadImage = async (base64EncodedImage) => {
-    console.log(base64EncodedImage);
-    try {
-      await fetch("http://localhost:5000/api/v1/product/add", {
-        method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // const history = useRouter();
-
-  // const saveProduct = async (e) => {
-  //   //supaya tida reload
-  //   e.preventDefault();
-  //   await axios.post("http://loaclhost:5000/", {
-  //     product_name: name,
-  //     product_price: price,
-  //     product_category: category,
-  //     product_desc: desc,
-  //     product_img: imgs,
-  //   });
-  //   history.push("/profile");
-  // };
-
-  // const getImage = (e) => setImgs(URL.createObjectURL(e.target.files[0]));
-
-  // const uploadFiles = () => {
-  //   document.getElementById("foto_produk").click();
-  // };
   return (
     <div id="add" className="container content position-relative">
       <div className="row">
@@ -168,23 +170,25 @@ const Add = () => {
                       +
                     </a>
                   </label>
-                  {previewSource && (
-                    <div className="prev-imgs">
-                      <img
-                        className="prev-img"
-                        alt="chosen"
-                        src={previewSource}
-                      />
-                    </div>
-                  )}
+                  {previewSource.length > 0
+                    ? previewSource.map((preview, idx) => (
+                        <div key={idx} className="prev-imgs">
+                          <img
+                            className="prev-img"
+                            alt="chosen"
+                            src={preview}
+                          />
+                        </div>
+                      ))
+                    : null}
                   <div>
                     <input
                       className="file-input"
                       type="file"
+                      multiple
                       id="foto_produk"
-                      name="foto_produk"
+                      name="product_img"
                       onChange={handleFileInputChange}
-                      value={fileInputState}
                     />
                   </div>
                 </div>
