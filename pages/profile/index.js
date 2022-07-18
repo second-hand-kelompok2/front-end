@@ -3,6 +3,7 @@ import CardList from "../../components/seller/cardlist";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
+import API from "../../services";
 
 const DaftarJual = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +31,7 @@ const DaftarJual = () => {
   // fetch data api
   const getUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/users");
+      const response = await API.get("/users");
       console.log(response.data);
       setUsers(response.data.data);
     } catch (err) {}
@@ -57,18 +58,14 @@ const DaftarJual = () => {
                   ></img>
                 </div>
                 <div className="profile-name d-inline">
-                  {users.length == 0 ? "loading" : users[0].name}
+                  {users.length == 0 ? "loading" : users.name}
                   <br />
                   <font className="profile-kota ">
-                    {users.length == 0 ? "loading" : users[0].city}
+                    {users.length == 0 ? "loading" : users.city}
                   </font>
                 </div>
                 <div className="profile-button d-inline float-end mt-2">
-                  <Link
-                    href={`/profile/edit/${
-                      users.length == 0 ? "loading" : users[0].id
-                    }`}
-                  >
+                  <Link href={`/profile/edit/${users.id}`}>
                     <button type="button" className="btn btn-outline-dark">
                       Edit
                     </button>
