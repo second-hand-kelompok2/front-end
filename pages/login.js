@@ -28,7 +28,20 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
+
         window.localStorage.setItem("token", val.data.data.token);
+        window.localStorage.setItem("id", val.data.data.user.secureuser.id);
+        window.localStorage.setItem("name", val.data.data.user.secureuser.name);
+        window.localStorage.setItem("city", val.data.data.user.secureuser.city);
+        window.localStorage.setItem(
+          "profile_img",
+          val.data.data.user.secureuser.profile_img
+        );
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify(val.data.data.user.secureuser)
+        );
+        console.log(val.data.data.user);
         router.push({ pathname: "/" });
       })
       .catch((err) => {
