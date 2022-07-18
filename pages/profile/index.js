@@ -4,10 +4,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import API from "../../services";
-
+import { useSSRSafeId } from "@react-aria/ssr";
+const user =
+  typeof window !== "undefined"
+    ? JSON.parse(window.localStorage.getItem("user"))
+    : {};
 const DaftarJual = () => {
   const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState({});
 
   //memanggil func getproducts
   useEffect(() => {
@@ -15,14 +19,21 @@ const DaftarJual = () => {
   }, []);
 
   //memanggil func getproducts
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
+
   useEffect(() => {
-    getUsers();
-  }, []);
+    setUsers(user);
+  }, [user]);
 
   // fetch data api
   const getProducts = async () => {
+    const userid = window.localStorage.getItem("id");
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/product");
+      const response = await axios.get(
+        `http://localhost:5000/api/v1/product/${userid}`
+      );
       console.log(response.data);
       setProducts(response.data.data);
     } catch (err) {}
@@ -31,7 +42,7 @@ const DaftarJual = () => {
   // fetch data api
   const getUsers = async () => {
     try {
-      const response = await API.get("/users");
+      const response = await axios.get(`http://localhost:5000/api/v1/users/`);
       console.log(response.data);
       setUsers(response.data.data);
     } catch (err) {}
@@ -50,7 +61,7 @@ const DaftarJual = () => {
               <div className="profile-card border border-3 rounded">
                 <div className="profile-img d-inline">
                   <img
-                    src="images/image-casio1.png"
+                    src={users?.product_img}
                     width="50"
                     height="50"
                     className="rounded"
@@ -58,14 +69,13 @@ const DaftarJual = () => {
                   ></img>
                 </div>
                 <div className="profile-name d-inline">
-                  {users.length == 0 ? "loading" : users.name}
+                  {/* {users.length == 0 ? "loading" : users[0].name} */}
+                  {users?.name}
                   <br />
-                  <font className="profile-kota ">
-                    {users.length == 0 ? "loading" : users.city}
-                  </font>
+                  <font className="profile-kota ">{users?.city}</font>
                 </div>
                 <div className="profile-button d-inline float-end mt-2">
-                  <Link href={`/profile/edit/${users.id}`}>
+                  <Link href={`/profile/edit/${users?.id}`}>
                     <button type="button" className="btn btn-outline-dark">
                       Edit
                     </button>
