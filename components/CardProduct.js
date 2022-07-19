@@ -10,7 +10,7 @@ export default function CardProduct(props) {
         <Link href="/">
           <a>
             <img
-              src={props.props.Images[0]}
+              src={props.props.Images[0].product_img}
               alt="Image not available"
               className={styles.imgProduk}
             />
