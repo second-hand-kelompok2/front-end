@@ -27,6 +27,7 @@ function Profile() {
   }, []);
   const getUserByID = async () => {
     const response = await API.get(`/users/${id}`);
+    console.log(response.data.data);
     setFileInputState(response.data.data.profile_img);
     setName(response.data.data.name);
     setCity(response.data.data.city);
@@ -118,6 +119,13 @@ function Profile() {
                 className="custom-rounded p-2"
               />
             </Form.Group>
+            
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Nama"
+            ></input>
             <Form.Group controlId="kota" className="mt-3">
               <Form.Label className="fw-bold">Kota</Form.Label>
               <Form.Control
