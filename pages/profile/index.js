@@ -122,28 +122,30 @@ const DaftarJual = () => {
               ? "loading"
               : products.map((product) => (
                   <div className="card-item" key={product.id}>
-                    <div
-                      id="cardSell"
-                      className="card"
-                      style={{ width: "18rem" }}
-                    >
-                      <img
-                        src={product.Images[0].product_img}
-                        className="card-img-top"
-                        alt="..."
-                      ></img>
-                      <div className="card-body">
-                        <p className="card-text name-p">
-                          {product.product_name}
-                        </p>
-                        <p className="card-text type-p">
-                          {product.product_type}
-                        </p>
-                        <p className="card-text price-p">
-                          {product.product_price}
-                        </p>
+                    <a className="cardlink" href={`/product/${product.id}`}>
+                      <div
+                        id="cardSell"
+                        className="card"
+                        style={{ width: "18rem" }}
+                      >
+                        <img
+                          src={product.Images[0].product_img}
+                          className="card-img-top"
+                          alt="..."
+                        ></img>
+                        <div className="card-body">
+                          <p className="card-text name-p">
+                            {product.product_name}
+                          </p>
+                          <p className="card-text type-p">
+                            {product.product_type}
+                          </p>
+                          <p className="card-text price-p">
+                            {product.product_price}
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 ))}
           </div>
