@@ -6,6 +6,8 @@ import { Search } from "react-bootstrap-icons";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import CardProduct from "./CardProduct";
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const jam = [
   {
@@ -65,28 +67,28 @@ const jam = [
     harga: "789.989",
   },
   {
-    id:8,
+    id:9,
     image: "/images/jamtangan9.jpg",
     judul: "SKMEI Analog Pria Strap Kulit - 1618 - Golden",
     kategori: "",
     harga: "759.989",
   },
   {
-    id:8,
+    id:10,
     image: "/images/jamtangan10.jpg",
     judul: "Jual Jam Tangan Ripcurl 6295 Tali Kulit",
     kategori: "",
     harga: "259.900",
   },
   {
-    id:8,
+    id:11,
     image: "/images/jamtangan11.jpg",
     judul: "Jam Quicksilver",
     kategori: "",
     harga: "900.989",
   },
   {
-    id:8,
+    id:12,
     image: "/images/jamtangan12.jpeg",
     judul: "Msg W200g 1a2jf",
     kategori: "",
@@ -95,65 +97,100 @@ const jam = [
 ];
 
 export default function ListProduct() {
-  const router = useRouter();
+  // const router = useRouter();
+  const [productList, setProductList] = useState([])
+
+  useEffect(() => {
+    getProduct()
+    console.log("Produk: ", productList)
+  }, [])
+  
+  const getProduct = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product`)
+      setProductList(response.data.data)
+      console.log('Get All ', productList)
+    }
+
+    catch(err) {
+      console.log(err)
+    }
+  }
+
+  const handleFilter = async (e, category) => {
+    try {
+      e.preventDefault()
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product/filterByCategory`, {
+          category
+        })
+        setProductList(response.data.data)
+        console.log('Filter ', category, productList)
+    }
+
+    catch(err) {
+      console.log(err)
+    }
+  }
+
+  const handleSearch = async (e, productName) => {
+    try {
+      e.preventDefault()
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product/filterByName`, {
+          productName
+        })
+        setProductList(response.data)
+        console.log('Search ', productName, productList)
+    }
+
+    catch(err) {
+      console.log(err)
+    }
+  }
+
   return (
     <>
       <Container>
         <h1 className={styles.title}>Telusuri Kategori</h1>
+
         <div className={styles.btnFilterContainer}>
-          <Link href="">
             <a>
-              <Button className={styles.btnFilterActive} type="search">
+              <Button className={styles.btnFilterActive} type="search" onClick={() => getProduct()}>
                 <Search className={styles.icon} />
                 <p className={styles.text}>Semua</p>
               </Button>
             </a>
-          </Link>
-          <Link href="">
             <a>
-              <Button className={styles.btnFilterActive} type="search">
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Hobi")}>
                 <Search className={styles.icon} />
                 <p className={styles.text}>Hobi</p>
               </Button>
             </a>
-          </Link>
-          <Link href="">
             <a>
-              <Button className={styles.btnFilterActive} type="search">
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Kendaraan")}>
                 <Search className={styles.icon} />
                 <p className={styles.text}>Kendaraan</p>
               </Button>
             </a>
-          </Link>
-          <Link href="">
             <a>
-              <Button className={styles.btnFilterActive} type="search">
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Baju")}>
                 <Search className={styles.icon} />
                 <p className={styles.text}>Baju</p>
               </Button>
             </a>
-          </Link>
-          <Link href="">
             <a>
-              <Button className={styles.btnFilterActive} type="search">
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Aksesoris")}>
                 <Search className={styles.icon} />
-                <p className={styles.text}>Eletronik</p>
+                <p className={styles.text}>Aksesoris</p>
               </Button>
             </a>
-          </Link>
-          <Link href="">
-            <a>
-              <Button className={styles.btnFilterActive} type="search">
-                <Search className={styles.icon} />
-                <p className={styles.text}>Kesehatan</p>
-              </Button>
-            </a>
-          </Link>
         </div>
+        
         <div className={styles.produkContainer}>
-          {jam.map((a) => (
+          {/* {jam.map((a) => (
             <CardProduct buku={a} key={a.id}/>
-          ))}
+          ))} */}
+
+          { productList.map((item) => <CardProduct key={item.id} props={item}/>) }
         </div>
       </Container>
     </>

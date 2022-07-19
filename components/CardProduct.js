@@ -4,26 +4,26 @@ import Link from "next/link";
 import styles from "../styles/ProductCard.module.css";
 
 export default function CardProduct(props) {
-  const { buku } = props;
-  
+  // const { props } = props;
+  console.log("From component: ", props)
   return (
     <>
       <div className={styles.card}>
         <Link href="/">
           <a>
             <img
-              src={buku.image}
-              alt={buku.judul}
+              src={props.props.Images[0]}
+              alt="Image not available"
               className={styles.imgProduk}
             />
           </a>
         </Link>
         <Link href="/">
           <a>
-            <p className={styles.judul}>{buku.judul}</p>
+            <p className={styles.judul}>{props.props.product_name}</p>
           </a>
         </Link>
-        <p className={styles.harga}>Rp {buku.harga}</p>
+        <p className={styles.harga}>Rp {props.props.product_price}</p>
       </div>
     </>
   );
