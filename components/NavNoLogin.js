@@ -22,25 +22,13 @@ export const NavNoLogin = () => {
         <Container className={styles.container}>
           <div className={styles.box1}>
             <NavbarBrand href="/">
-              <img
-                src="/images/logo.png"
-                alt="logo"
-                width="100px"
-                height="34px"
-              />
+              <img src="/images/logo.png" alt="logo" width="100px" height="34px"/>
             </NavbarBrand>
 
-            <Form.Group className={styles.search}>
-              <input
-                type="search"
-                placeholder="Cari di sini ..."
-                aria-label="Search"
-                className={styles.formsearch}
-              />
-              <button type="search" className={styles.btnsearch}>
-                <Search className={styles.iconsearch}/>
-              </button>
-            </Form.Group>
+            {/* <Form.Group className={styles.search}>
+              <input type="search" placeholder="Cari di sini ..." aria-label="Search" className={styles.formsearch}/>
+              <button type="search" className={styles.btnsearch}><Search className={styles.iconsearch}/></button>
+            </Form.Group> */}
           </div>
           <div>
             <Button href="/login" className={styles.btn}>

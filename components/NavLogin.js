@@ -31,7 +31,7 @@ export const NavLogin = () => {
               />
             </NavbarBrand>
 
-            <Form.Group className={styles.search}>
+            {/* <Form.Group className={styles.search}>
               <input
                 type="search"
                 placeholder="Cari di sini"
@@ -41,7 +41,7 @@ export const NavLogin = () => {
               <button type="search" className={styles.btnsearch}>
                 <Search className={styles.iconsearch} />
               </button>
-            </Form.Group>
+            </Form.Group> */}
 
             {/* <NavbarToggle aria-controls="basic-navbar-nav" /> */}
           </div>
