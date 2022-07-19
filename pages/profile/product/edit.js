@@ -1,45 +1,87 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import API from "../../../services";
 import { useRouter } from "next/router";
-// import { stripBasename } from "react-router/lib/router";
+// import _ from "lodash";
 
 const Edit = () => {
-  // const [name, setName] = useState("");
-  // const [price, setPrice] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [desc, setDesc] = useState("");
+  // const router = useRouter();
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
+  const [location, setLocation] = useState("");
+  const [status, setStatus] = useState("");
 
-  const [imgs, setImgs] = useState("");
+  const [fileInputState, setFileInputState] = useState([]);
+  const [previewSource, setPreviewSource] = useState([]);
 
-  // const history = useRouter();
-  // const {id} = history.query
-
-  // const updateProduct = async (e) => {
-  //   //supaya tida reload
-  //   e.preventDefault();
-  //   await axios.post(`http://loaclhost:3000/${id}`, {
-  //     product_name: name,
-  //     product_price: price,
-  //     product_category: category,
-  //     product_desc: desc,
-  //     product_img: imgs,
-  //   });
-  //   history.push("/profile");
-  // };
-
-  // useEffect(() => {
-  //   getProductById();
-  // }, []);
-  // const getProductById = async () => {
-  //   const response = await axios.get(`http://localhost:3000/profile/${id}`);
-  //   stripBasename(response.data.name);
-  // };
-
-  const getImage = (e) => setImgs(URL.createObjectURL(e.target.files[0]));
-
-  const uploadFiles = () => {
-    document.getElementById("foto_produk").click();
+  const handleFileInputChange = (e) => {
+    const { files } = e.target;
+    const validImageFiles = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      validImageFiles.push(file);
+    }
+    if (validImageFiles.length) {
+      setFileInputState(validImageFiles);
+      return;
+    }
   };
+
+  useEffect(() => {
+    const previewSource = [],
+      fileReaders = [];
+    let isCancel = false;
+    if (fileInputState.length) {
+      fileInputState.forEach((file) => {
+        const fileReader = new FileReader();
+        fileReaders.push(fileReader);
+        fileReader.onload = (e) => {
+          const { result } = e.target;
+          if (result) {
+            previewSource.push(result);
+          }
+          if (previewSource.length === fileInputState.length && !isCancel) {
+            setPreviewSource(previewSource);
+          }
+        };
+        fileReader.readAsDataURL(file);
+      });
+    }
+    return () => {
+      isCancel = true;
+      fileReaders.forEach((fileReader) => {
+        if (fileReader.readyState === 1) {
+          fileReader.abort();
+        }
+      });
+    };
+  }, [fileInputState]);
+
+  const handleSubmitFile = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("product_name", name);
+    formData.append("product_category", category);
+    formData.append("product_desc", desc);
+    formData.append("product_price", price);
+    Object.values(fileInputState).forEach((file) => {
+      formData.append("product_img", file);
+    });
+    const token = window.localStorage.getItem("token");
+
+    try {
+      await API.post("/product/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: token,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div id="edit" className="container content position-relative">
       <div className="row">
@@ -47,12 +89,8 @@ const Edit = () => {
           <p className="icon-arrow mt-5 h2 fw-bold">
             <span>&larr;</span>
           </p>
-          <div className="form-edit">
-            <form
-              action="/send-data-here"
-              method="post"
-              //   enctype="multipart/form-data"
-            >
+          <div className="form-add">
+            <form onSubmit={handleSubmitFile}>
               <div className="row">
                 <label className="form-label" for="nama_produk">
                   Nama Produk
@@ -63,6 +101,8 @@ const Edit = () => {
                     type="text"
                     id="nama_produk"
                     name="nama_produk"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Nama Produk"
                   />
                 </div>
@@ -77,6 +117,8 @@ const Edit = () => {
                     type="text"
                     id="harga_produk"
                     name="harga_produk"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                     placeholder="Rp 0.00"
                   />
                 </div>
@@ -86,12 +128,17 @@ const Edit = () => {
                   Kategori
                 </label>
                 <div>
-                  <select className="form-select" name="kategori">
+                  <select
+                    class="form-select"
+                    name="kategori"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
                     <option selected hidden>
                       Pilih Kategori
                     </option>
                     <option value="Mobil">Mobil</option>
-                    <option value="Aksesoris">Jam Tangan</option>
+                    <option value="Jam Tangan">Jam Tangan</option>
                     <option value="Monitor">Monitor</option>
                     <option value="Motor">Motor</option>
                     <option value="Laptop">Laptop</option>
@@ -107,30 +154,47 @@ const Edit = () => {
                     className="form_input form-control"
                     id="deskripsi"
                     name="deskripsi"
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
                     placeholder="Contoh : Ikan Hiu 33"
                   />
                 </div>
               </div>
               <div className="row">
-                <label className="form-label-foto" for="foto_produk">
-                  Foto Produk
-                  <br />
-                  <a class="btn-img" rel="nofollow">
-                    +
-                  </a>
-                </label>
-                <div>
-                  <input
-                    className="file-input"
-                    type="file"
-                    id="foto_produk"
-                    name="foto_produk"
-                  />
+                {/* <SingleUploader/> */}
+                <div className="d-flex">
+                  <label className="form-label-foto" for="foto_produk">
+                    Foto Produk
+                    <br />
+                    <a class="btn-img" rel="nofollow">
+                      +
+                    </a>
+                  </label>
+                  {previewSource.length > 0
+                    ? previewSource.map((preview, idx) => (
+                        <div key={idx} className="prev-imgs">
+                          <img
+                            className="prev-img"
+                            alt="chosen"
+                            src={preview}
+                          />
+                        </div>
+                      ))
+                    : null}
+                  <div>
+                    <input
+                      className="file-input"
+                      type="file"
+                      multiple
+                      id="foto_produk"
+                      name="product_img"
+                      onChange={handleFileInputChange}
+                    />
+                  </div>
                 </div>
-                <div id="display-image"></div>
               </div>
-              <button type="button" className="btn-edit">
-                Update
+              <button type="submit" className="btn-add">
+                Terbitkan
               </button>
             </form>
           </div>
