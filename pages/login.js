@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 const Login = () => {
   const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
+
   const onSubmit = async (data) => {
     const { email, password } = data;
     const res = await axios
