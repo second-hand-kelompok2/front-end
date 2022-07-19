@@ -1,6 +1,6 @@
 import { Col, Row, Image, Form, Button, Nav, Navbar } from "react-bootstrap";
 import Link from "next/link";
-import  LogoImage  from "../../components/LogoImage"
+import  LogoImage  from "../../../components/LogoImage"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCamera,

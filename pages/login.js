@@ -5,11 +5,12 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Router } from "react-bootstrap-icons";
 import { useRouter } from "next/router";
 
 const Login = () => {
-  const { register, handleSubmit, errors } = useForm();
   const router = useRouter();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
     const { email, password } = data;
@@ -28,7 +29,14 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
-        router.push({ pathname: "/home" });
+
+        window.localStorage.setItem("token", val.data.data.token);
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify(val.data.data.user.secureuser)
+        );
+        console.log(val.data.data.user);
+        router.push({ pathname: "/" });
       })
       .catch((err) => {
         toast.error("Invalid Email or Password", {

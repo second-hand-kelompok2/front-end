@@ -1,35 +1,87 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import API from "../../../services";
 import { useRouter } from "next/router";
+// import _ from "lodash";
 
 const Add = () => {
-  // const [name, setName] = useState("");
-  // const [price, setPrice] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [desc, setDesc] = useState("");
+  // const router = useRouter();
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
+  const [location, setLocation] = useState("");
+  const [status, setStatus] = useState("");
 
-  const [imgs, setImgs] = useState("");
+  const [fileInputState, setFileInputState] = useState([]);
+  const [previewSource, setPreviewSource] = useState([]);
 
-  // const history = useRouter();
-
-  // const saveProduct = async (e) => {
-  //   //supaya tida reload
-  //   e.preventDefault();
-  //   await axios.post("http://loaclhost:3000/", {
-  //     product_name: name,
-  //     product_price: price,
-  //     product_category: category,
-  //     product_desc: desc,
-  //     product_img: imgs,
-  //   });
-  //   history.push("/profile");
-  // };
-
-  const getImage = (e) => setImgs(URL.createObjectURL(e.target.files[0]));
-
-  const uploadFiles = () => {
-    document.getElementById("foto_produk").click();
+  const handleFileInputChange = (e) => {
+    const { files } = e.target;
+    const validImageFiles = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      validImageFiles.push(file);
+    }
+    if (validImageFiles.length) {
+      setFileInputState(validImageFiles);
+      return;
+    }
   };
+
+  useEffect(() => {
+    const previewSource = [],
+      fileReaders = [];
+    let isCancel = false;
+    if (fileInputState.length) {
+      fileInputState.forEach((file) => {
+        const fileReader = new FileReader();
+        fileReaders.push(fileReader);
+        fileReader.onload = (e) => {
+          const { result } = e.target;
+          if (result) {
+            previewSource.push(result);
+          }
+          if (previewSource.length === fileInputState.length && !isCancel) {
+            setPreviewSource(previewSource);
+          }
+        };
+        fileReader.readAsDataURL(file);
+      });
+    }
+    return () => {
+      isCancel = true;
+      fileReaders.forEach((fileReader) => {
+        if (fileReader.readyState === 1) {
+          fileReader.abort();
+        }
+      });
+    };
+  }, [fileInputState]);
+
+  const handleSubmitFile = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("product_name", name);
+    formData.append("product_category", category);
+    formData.append("product_desc", desc);
+    formData.append("product_price", price);
+    Object.values(fileInputState).forEach((file) => {
+      formData.append("product_img", file);
+    });
+    const token = window.localStorage.getItem("token");
+
+    try {
+      await API.post("/product/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: token,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div id="add" className="container content position-relative">
       <div className="row">
@@ -38,7 +90,7 @@ const Add = () => {
             <span>&larr;</span>
           </p>
           <div className="form-add">
-            <form action="/send-data-here" method="post">
+            <form onSubmit={handleSubmitFile}>
               <div className="row">
                 <label className="form-label" for="nama_produk">
                   Nama Produk
@@ -49,6 +101,8 @@ const Add = () => {
                     type="text"
                     id="nama_produk"
                     name="nama_produk"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Nama Produk"
                   />
                 </div>
@@ -63,6 +117,8 @@ const Add = () => {
                     type="text"
                     id="harga_produk"
                     name="harga_produk"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                     placeholder="Rp 0.00"
                   />
                 </div>
@@ -72,7 +128,12 @@ const Add = () => {
                   Kategori
                 </label>
                 <div>
-                  <select class="form-select" name="kategori">
+                  <select
+                    class="form-select"
+                    name="kategori"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
                     <option selected hidden>
                       Pilih Kategori
                     </option>
@@ -93,137 +154,49 @@ const Add = () => {
                     className="form_input form-control"
                     id="deskripsi"
                     name="deskripsi"
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
                     placeholder="Contoh : Ikan Hiu 33"
                   />
                 </div>
               </div>
               <div className="row">
+                {/* <SingleUploader/> */}
                 <div className="d-flex">
-                  <label
-                    onClick={uploadFiles}
-                    className="form-label-foto"
-                    for="foto_produk"
-                  >
+                  <label className="form-label-foto" for="foto_produk">
                     Foto Produk
                     <br />
                     <a class="btn-img" rel="nofollow">
                       +
                     </a>
                   </label>
-                  <div className="prev-imgs">
-                    <img className="prev-img" src={imgs} />
-                  </div>
+                  {previewSource.length > 0
+                    ? previewSource.map((preview, idx) => (
+                        <div key={idx} className="prev-imgs">
+                          <img
+                            className="prev-img"
+                            alt="chosen"
+                            src={preview}
+                          />
+                        </div>
+                      ))
+                    : null}
                   <div>
                     <input
                       className="file-input"
                       type="file"
+                      multiple
                       id="foto_produk"
-                      name="foto_produk"
-                      onChange={getImage}
+                      name="product_img"
+                      onChange={handleFileInputChange}
                     />
                   </div>
                 </div>
               </div>
-              <button type="button" className="btn-add">
+              <button type="submit" className="btn-add">
                 Terbitkan
               </button>
             </form>
-            {/* <form onSubmit={saveProduct}>
-              <div className="row">
-                <label className="form-label" for="nama_produk">
-                  Nama Produk
-                </label>
-                <div>
-                  <input
-                    className="form_input"
-                    type="text"
-                    id="nama_produk"
-                    name="nama_produk"
-                    placeholder="Nama Produk"
-                    // value={name}
-                    // onChange={(e)=> setName(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <label className="form-label" for="harga_produk">
-                  Harga Produk
-                </label>
-                <div>
-                  <input
-                    className="form_input"
-                    type="text"
-                    id="harga_produk"
-                    name="harga_produk"
-                    placeholder="Rp 0.00"
-                    // value={price}
-                    // onChange={(e) => setPrice(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <label className="form-label" for="kategori">
-                  Kategori
-                </label>
-                <div>
-                  <select class="form-select" name="kategori">
-                    <option selected hidden>
-                      Pilih Kategori
-                    </option>
-                    <option value="Mobil">Mobil</option>
-                    <option value="Aksesoris">Jam Tangan</option>
-                    <option value="Monitor">Monitor</option>
-                    <option value="Motor">Motor</option>
-                    <option value="Laptop">Laptop</option>
-                  </select>
-                </div>
-              </div>
-              <div className="row">
-                <label className="form-label" for="deskripsi">
-                  Deskripsi
-                </label>
-                <div>
-                  <textarea
-                    className="form_input form-control"
-                    id="deskripsi"
-                    name="deskripsi"
-                    placeholder="Contoh : Ikan Hiu 33"
-                    // value={desc}
-                    // onChange={(e) => setDesc(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="d-flex">
-                  <label
-                    onClick={uploadFiles}
-                    className="form-label-foto"
-                    for="foto_produk"
-                  >
-                    Foto Produk
-                    <br />
-                    <a class="btn-img" rel="nofollow">
-                      +
-                    </a>
-                  </label>
-                  <div className="prev-imgs">
-                    <img className="prev-img" src={imgs} />
-                  </div>
-                  <div>
-                    <input
-                      className="file-input"
-                      type="file"
-                      id="foto_produk"
-                      name="foto_produk"
-                      onChange={getImage}
-                    />
-                  </div>
-                </div>
-              </div>
-              <button type="button" className="btn-add">
-                Terbitkan
-              </button>
-            </form> */}
           </div>
         </div>
       </div>
