@@ -13,8 +13,7 @@ import API from "../../../services";
 import { useParams } from "react-router-dom";
 
 function Profile() {
-  // const router = useRouter();
-  const { id } = useParams();
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [file, setFile] = useState("");
@@ -26,7 +25,8 @@ function Profile() {
     getUserByID();
   }, []);
   const getUserByID = async () => {
-    const response = await API.get(`/users/${id}`);
+    console.log(router.query.id);
+    const response = await API.get(`/users/${router.query.id}`);
     console.log(response.data.data);
     setFileInputState(response.data.data.profile_img);
     setName(response.data.data.name);
@@ -119,7 +119,6 @@ function Profile() {
                 className="custom-rounded p-2"
               />
             </Form.Group>
-            
             <input
               type="text"
               value={name}
