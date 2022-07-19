@@ -10,11 +10,11 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import API from "../../../services";
-import { get } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 function Profile() {
-  const router = useRouter();
-  const { pid } = router.query;
+  // const router = useRouter();
+  const { id } = useParams();
 
   const [name, setName] = useState("");
   const [file, setFile] = useState("");
@@ -26,7 +26,7 @@ function Profile() {
     getUserByID();
   }, []);
   const getUserByID = async () => {
-    const response = await API.get(`/users/${pid}`);
+    const response = await API.get(`/users/${id}`);
     setFileInputState(response.data.data.profile_img);
     setName(response.data.data.name);
     setCity(response.data.data.city);
@@ -64,7 +64,7 @@ function Profile() {
       formData.append("phone", phone);
       formData.append("city", city);
       formData.append("address", address);
-      await API.post(`/profile/update/${pid}`, formData);
+      await API.post(`/profile/update/${id}`, formData);
     } catch (error) {
       console.log(error);
     }
