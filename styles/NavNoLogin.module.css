@@ -1,20 +1,21 @@
 .header {
     background-color: #fff;
-    /* position: fixed; */
+    position: sticky;
+    top: 0;
     width: 100%;
-    z-index: 125;
+    z-index: 5;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
     font-family: poppins;
   }
   .container {
     display: flex;
-    flex-dirextion: row;
+    flex-direction: row;
     justify-content: between;
     padding: 20px 0px;
   }
   .box1 {
     display: flex;
-    flex-dirextion: row;
+    flex-direction: row;
   }
   .search {
     display: flex;
@@ -82,3 +83,10 @@
     line-height: 20px;
   }
   
+  #homeSearch {
+    position: fixed;
+    z-index: 6;
+    top: 28px;
+    width: fit-content;
+    margin-left: 100px;
+  }

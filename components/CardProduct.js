@@ -4,8 +4,6 @@ import Link from "next/link";
 import styles from "../styles/ProductCard.module.css";
 
 export default function CardProduct(props) {
-  // const { props } = props;
-  console.log("From component: ", props)
   return (
     <>
       <div className={styles.card}>
