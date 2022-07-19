@@ -122,7 +122,10 @@ const DaftarJual = () => {
               ? "loading"
               : products.map((product) => (
                   <div className="card-item" key={product.id}>
-                    <a className="cardlink" href={`/product/${product.id}`}>
+                    <a
+                      className="cardlink"
+                      href={`profile/product/${product.id}`}
+                    >
                       <div
                         id="cardSell"
                         className="card"
