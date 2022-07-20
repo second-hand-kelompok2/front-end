@@ -436,7 +436,7 @@ a {
   letter-spacing: 20px;
   background: url(../public/images/img2.jpg);
   -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 .not-found3 {
