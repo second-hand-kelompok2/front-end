@@ -4,10 +4,11 @@ import Link from "next/link";
 import styles from "../styles/ProductCard.module.css";
 
 export default function CardProduct(props) {
+  console.log('id: ', props.props.id)
   return (
     <>
-      <div className={styles.card}>
-        <Link href="/">
+      <div id={props.props.id} className={styles.card}>
+        <Link href={`/product/${props.props.id}`}>
           <a>
             <img
               src={props.props.Images[0].product_img}

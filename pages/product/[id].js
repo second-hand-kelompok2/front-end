@@ -1,10 +1,35 @@
 import Carousel from 'react-elastic-carousel';
-import style from '../styles/Info.module.css';
-import { useState } from 'react';
-import { NavbarProfile } from '../components/navbar';
-// import Images from '../components/ProductImages';
+import style from '../../styles/Info.module.css';
+import { useState, useEffect } from 'react';
+import axios from "axios"
+import { useRouter } from 'next/router';
+import { NavbarProfile } from '../../components/navbar';
+import Images from '../../components/ProductImages';
 
 const ProductInfo_Buyer = () => {
+    const [product, setProduct] = useState([])
+    const [images, setImages] = useState([])
+    const router = useRouter()
+
+    useEffect(() => {
+        getProduct()
+    }, [])
+
+    const getProduct = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product/info/${router.query.id}`)
+            setProduct(response.data.data[0])
+            setImages(response.data.data[0].Images)
+            console.log('Data: ', response.data.data[0])
+            console.log('Images: ', response.data.data[0].Images[0])
+            // console.log(router.query.id)
+        }
+
+        catch(err) {
+            console.log(err)
+        }
+    }
+
     const [displayClass, setDisplayClass] = useState(style.popupHide)
 
     const changeDisplay = () => {
@@ -25,11 +50,11 @@ const ProductInfo_Buyer = () => {
             <div className={style.left}>
                 <div className={style.top}>
                     <Carousel className={style.carousel}>
+                        {/* <img src='/images/sample_product_big.png' alt='product_image'/>
                         <img src='/images/sample_product_big.png' alt='product_image'/>
                         <img src='/images/sample_product_big.png' alt='product_image'/>
-                        <img src='/images/sample_product_big.png' alt='product_image'/>
-                        <img src='/images/sample_product_big.png' alt='product_image'/>
-                        {/* <Images></Images> */}
+                        <img src='/images/sample_product_big.png' alt='product_image'/> */}
+                        { images.map((item) => <Images props={item}></Images>) }
                     </Carousel>
                 </div>
                 
@@ -42,9 +67,9 @@ const ProductInfo_Buyer = () => {
 
             <div className={style.right}>
                 <div className={style.top}>
-                    <h2>Product Name</h2>
-                    <p>Category</p>
-                    <h3>Product Price</h3>
+                    <h2>{product.product_name}</h2>
+                    <p>{product.product_category}</p>
+                    <h3>Rp {product.product_price}</h3>
                     <button className={style.btnPurple} onClick={changeDisplay}>Saya tertarik dan ingin nego</button>
                 </div>
                 
@@ -70,8 +95,8 @@ const ProductInfo_Buyer = () => {
                             <img src='/images/sample_product_big.png' alt='profileImage'/>
                             
                             <div>
-                                <h1>Jam Tangan Casio</h1>
-                                <h3>Rp 250.000</h3>
+                                <h1>{product.product_name}</h1>
+                                <h3>Rp {product.product_price}</h3>
                             </div>
                         </div>
 
