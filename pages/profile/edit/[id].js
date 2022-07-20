@@ -1,5 +1,4 @@
 import { Col, Row, Image, Form, Button, Nav, Navbar } from "react-bootstrap";
-import Link from "next/link";
 import LogoImage from "../../../components/LogoImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,18 +7,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import API from "../../../services";
-import { useParams } from "react-router-dom";
 
 function Profile() {
   const router = useRouter();
 
   const [name, setName] = useState("");
-  const [file, setFile] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const [fileInputState, setFileInputState] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  const [selectedFile, setSelectedFile] = useState(false);
 
   useEffect(() => {
     getUserByID();
@@ -27,56 +26,44 @@ function Profile() {
   const getUserByID = async () => {
     console.log(router.query.id);
     const response = await API.get(`/users/${router.query.id}`);
-    console.log(response.data.data);
-    setFileInputState(response.data.data.profile_img);
-    setName(response.data.data.name);
-    setCity(response.data.data.city);
-    setAddress(response.data.data.address);
-    setPhone(response.data.data.phone);
+    console.log(response.data.data[0]);
+    setFileInputState(response.data.data[0].profile_img);
+    setName(response.data.data[0].name);
+    setCity(response.data.data[0].city);
+    setAddress(response.data.data[0].address);
+    setPhone(response.data.data[0].phone);
   };
-
-  const [fileInputState, setFileInputState] = useState("");
-  const [previewSource, setPreviewSource] = useState("");
-  const [selectedFile, setSelectedFile] = useState();
 
   const handleFileInputChange = (e) => {
     setFileInputState(e.target.files[0]);
-    // const product_img = e.target.files[0];
-    // previewFile(e.target.files[0]);
-    // setSelectedFile(product_img);
-    // setFileInputState(e.target.value);
+    previewFile(e.target.files[0]);
   };
 
-  // const previewFile = (file) => {
-  //   const reader = new FileReader();
-  //   // konvert to url
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setPreviewSource(reader.result);
-  //   };
-  // };
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    // konvert to url
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+      setSelectedFile(true);
+    };
+  };
 
   const handleSubmitFile = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("profile_img", fileInputState);
+    formData.append("phone", phone);
+    formData.append("city", city);
+    formData.append("address", address);
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("profile_img", fileInputState);
-      formData.append("phone", phone);
-      formData.append("city", city);
-      formData.append("address", address);
-      await API.post(`/profile/update/${id}`, formData);
+      await API.post(`/users/profile/update/${router.query.id}`, formData);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // function handleUploadChange(e) {
-  //   console.log(e.target.files[0]);
-  //   let Uploaded = e.target.files[0];
-  //   setImage(URL.createObjectURL(Uploaded));
-  //   setSaveImage(Uploaded);
-  // }
   return (
     <Row>
       <Nav className="navbar navbar-expand-lg shadow p-3 mb-5 bg-body rounded">
@@ -91,22 +78,33 @@ function Profile() {
         </div>
       </Nav>
       <Col md={6} className="my-auto mx-auto">
-        <div className="mx-auto my-auto CamIcon">
-          <label htmlFor="file-upload">
-            <FontAwesomeIcon
-              icon={faCamera}
-              id="btnIcon"
-              className="camera-icon"
+        {!selectedFile ? (
+          <div className="mx-auto my-auto CamIcon">
+            <label htmlFor="file-upload">
+              <FontAwesomeIcon
+                icon={faCamera}
+                id="btnIcon"
+                className="camera-icon"
+              />
+            </label>
+            <input
+              id="file-upload"
+              name="profile_img"
+              onChange={handleFileInputChange}
+              type="file"
+              className="custom-rounded p-2 image-file"
             />
-          </label>
-          <input
-            id="file-upload"
-            name="profile_img"
-            onChange={handleFileInputChange}
-            type="file"
-            className="custom-rounded p-2 image-file"
-          />
-        </div>
+          </div>
+        ) : (
+          <div className="mx-auto my-auto CamIcon">
+            <img
+              className="custom-rounded"
+              style={{width:130}}
+              src={previewSource}
+              alt="uploaded-img"
+            ></img>
+          </div>
+        )}
         <div className="mx-auto w-75">
           <Form onSubmit={handleSubmitFile}>
             <Form.Group controlId="name" className="mt-3">
@@ -119,12 +117,6 @@ function Profile() {
                 className="custom-rounded p-2"
               />
             </Form.Group>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Nama"
-            ></input>
             <Form.Group controlId="kota" className="mt-3">
               <Form.Label className="fw-bold">Kota</Form.Label>
               <Form.Control
