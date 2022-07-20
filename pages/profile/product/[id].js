@@ -1,9 +1,12 @@
 import Carousel from "react-elastic-carousel";
 import style from "../../../styles/Info.module.css";
 import { NavbarProfile } from "../../../components/navbar";
+import Link from "next/link";
+import { useRouter } from "next/router";
 // import Images from '../../../../components/ProductImages';
 
 const ProductInfo_Seller = () => {
+  const router = useRouter();
   return (
     <>
       <NavbarProfile></NavbarProfile>
@@ -48,7 +51,9 @@ const ProductInfo_Seller = () => {
             <p>Category</p>
             <h3>Product Price</h3>
             <button className={style.btnPurple}>Terbitkan</button>
-            <button className={style.btnWhite}>Edit</button>
+            <Link href={`/profile/product/edit/${router.query.id}`}>
+              <button className={style.btnWhite}>Edit</button>
+            </Link>
           </div>
 
           <div className={style.bottom}>

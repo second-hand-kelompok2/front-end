@@ -31,9 +31,7 @@ const DaftarJual = () => {
   const getProducts = async () => {
     const userid = window.localStorage.getItem("id");
     try {
-      const response = await axios.get(
-        `http://localhost:5000/api/v1/product/${userid}`
-      );
+      const response = await API.get(`/product/${userid}`);
       console.log(response.data);
       setProducts(response.data.data);
     } catch (err) {}
