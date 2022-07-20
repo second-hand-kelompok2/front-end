@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import API from "../../../services";
+import API from "../../../../services";
 import { useRouter } from "next/router";
 // import _ from "lodash";
 
 const Edit = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
@@ -14,6 +14,20 @@ const Edit = () => {
 
   const [fileInputState, setFileInputState] = useState([]);
   const [previewSource, setPreviewSource] = useState([]);
+
+  useEffect(() => {
+    getProductById();
+  }, []);
+  const getProductById = async () => {
+    console.log(router.query.id);
+    const response = await API.get(`/product/info/${router.query.id}`);
+    console.log(response.data.data[0]);
+    // setFileInputState(response.data.data[0].profile_img);
+    setName(response.data.data[0].product_name);
+    setCategory(response.data.data[0].product_category);
+    setDesc(response.data.data[0].product_desc);
+    setPrice(response.data.data[0].product_price);
+  };
 
   const handleFileInputChange = (e) => {
     const { files } = e.target;
@@ -71,7 +85,7 @@ const Edit = () => {
     const token = window.localStorage.getItem("token");
 
     try {
-      await API.post("/product/add", formData, {
+      await API.post(`/product/update/${router.query.id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           token: token,
@@ -83,7 +97,7 @@ const Edit = () => {
   };
 
   return (
-    <div id="edit" className="container content position-relative">
+    <div id="add" className="container content position-relative">
       <div className="row">
         <div className="col-12 mb-3">
           <p className="icon-arrow mt-5 h2 fw-bold">
