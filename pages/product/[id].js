@@ -1,10 +1,37 @@
 import Carousel from 'react-elastic-carousel';
-import style from '../styles/Info.module.css';
-import { useState } from 'react';
-import { NavbarProfile } from '../components/navbar';
-// import Images from '../components/ProductImages';
+import style from '../../styles/Info.module.css';
+import { useState, useEffect } from 'react';
+import axios from "axios"
+import { useRouter } from 'next/router';
+import { NavbarProfile } from '../../components/navbar';
+import Images from '../../components/ProductImages';
 
 const ProductInfo_Buyer = () => {
+    const [product, setProduct] = useState([])
+    const [images, setImages] = useState([])
+    const [smallImage, setSmallImage] = useState([])
+    const router = useRouter()
+
+    useEffect(() => {
+        getProduct()
+    }, [])
+
+    const getProduct = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product/info/${router.query.id}`)
+            setProduct(response.data.data[0])
+            setImages(response.data.data[0].Images)
+            setSmallImage(response.data.data[0].Images[0].product_img)
+            // console.log('Data: ', response.data.data[0])
+            // console.log('Images: ', response.data.data[0].Images[0])
+            // console.log(router.query.id)
+        }
+
+        catch(err) {
+            console.log(err)
+        }
+    }
+
     const [displayClass, setDisplayClass] = useState(style.popupHide)
 
     const changeDisplay = () => {
@@ -25,26 +52,23 @@ const ProductInfo_Buyer = () => {
             <div className={style.left}>
                 <div className={style.top}>
                     <Carousel className={style.carousel}>
-                        <img src='/images/sample_product_big.png' alt='product_image'/>
-                        <img src='/images/sample_product_big.png' alt='product_image'/>
-                        <img src='/images/sample_product_big.png' alt='product_image'/>
-                        <img src='/images/sample_product_big.png' alt='product_image'/>
-                        {/* <Images></Images> */}
+                        { images.map((item) => <Images props={item}></Images>) }
                     </Carousel>
                 </div>
                 
                 <div className={style.bottom}>
                     <h1>Deskripsi</h1>
+                    <p>{product.product_desc}</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> */}
                 </div>
             </div>
 
             <div className={style.right}>
                 <div className={style.top}>
-                    <h2>Product Name</h2>
-                    <p>Category</p>
-                    <h3>Product Price</h3>
+                    <h2>{product.product_name}</h2>
+                    <p>{product.product_category}</p>
+                    <h3>Rp {product.product_price}</h3>
                     <button className={style.btnPurple} onClick={changeDisplay}>Saya tertarik dan ingin nego</button>
                 </div>
                 
@@ -67,11 +91,11 @@ const ProductInfo_Buyer = () => {
                         <h2>Harga tawaranmu akan diketahui penjual. Jika penjual cocok, kamu akan segera dihubungi penjual.</h2>
 
                         <div className={style.info}>
-                            <img src='/images/sample_product_big.png' alt='profileImage'/>
+                            <img src={smallImage} alt='profileImage'/>
                             
                             <div>
-                                <h1>Jam Tangan Casio</h1>
-                                <h3>Rp 250.000</h3>
+                                <h1>{product.product_name}</h1>
+                                <h3>Rp {product.product_price}</h3>
                             </div>
                         </div>
 
