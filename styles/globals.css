@@ -1,0 +1,460 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* daftar jual(ilyas) */
+#daftarjual .profile-card .profile-name {
+  width: fit-content;
+  margin-left: 15px;
+  position: relative;
+  top: -5px;
+  left: 30px;
+  font-weight: bold;
+}
+
+#daftarjual .profile-card .profile-kota {
+  font-weight: lighter;
+  width: fit-content;
+  margin-left: 15px;
+  position: relative;
+  top: -10px;
+  left: 50px;
+}
+
+#daftarjual .profile-card .profile-button {
+  position: relative;
+  top: -40px;
+  right: 20px;
+}
+#daftarjual .profile-card .profile-button .btn {
+  border-color: blueviolet;
+  color: blueviolet;
+}
+#daftarjual .profile-card .profile-button .btn:hover {
+  background-color: blueviolet;
+  border-color: #e2d4f0;
+  color: white;
+}
+
+#daftarjual .profile-card .profile-img {
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+
+#daftarjual .cardlink {
+  text-decoration: none;
+  color: black;
+}
+
+#daftarjual .card-position .card-seller {
+  margin-left: 40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#daftarjual .card-position .card-seller .button-card {
+  width: 290px;
+  height: 250px;
+  border-style: dashed;
+  border-color: grey;
+  border-width: 3px;
+  border-radius: 10px;
+  color: grey;
+  font-size: 20px;
+}
+#daftarjual .card-position .card-seller .button-card:hover {
+  border-color: blueviolet;
+  color: blueviolet;
+  background-color: #e2d4f0;
+}
+#daftarjual .card-position .card-seller .button-card .icon-plus {
+  font-size: 50px;
+}
+
+#daftarjual .card-position .card-seller .card-item {
+  margin-bottom: 40px;
+  margin-left: 30px;
+}
+
+#daftarjual .hidden-button {
+  display: none;
+}
+
+#daftarjual .hidden-button .btn {
+  background-color: #e2d4f0;
+  border-color: blueviolet;
+  color: black;
+  width: 200px;
+}
+
+#daftarjual .hidden-button .btn:hover {
+  background-color: blueviolet;
+  border-color: #e2d4f0;
+  color: white;
+  width: 200px;
+}
+/* component card */
+#cardSell p {
+  margin: 0px;
+}
+#cardSell .type-p {
+  font-size: 13px;
+  color: gray;
+  margin: 2px 0px 2px 0px;
+}
+/* component cardlist */
+#cardlist {
+  width: 18rem;
+}
+#cardlist a {
+  text-decoration: none;
+  color: black;
+}
+#cardlist a:hover {
+  color: blueviolet;
+}
+#cardlist hr {
+  height: 1px;
+}
+/* #cardlist font {
+  font-weight: bold;
+  font-size: 30px;
+  position: relative;
+  top: -10px;
+  color: #d0d0d0;
+} */
+#cardlist .kategori {
+  font-size: 20px;
+}
+#cardlist .semua-prod,
+.diminati,
+.terjual {
+  font-size: 20px;
+}
+
+/* add product */
+#add .icon-arrow span {
+  font-size: 40px;
+  cursor: pointer;
+}
+#add .icon-arrow span:hover {
+  color: blueviolet;
+}
+#add .row {
+  margin-bottom: 20px;
+}
+
+#add .form-add .form-label-foto {
+  width: fit-content;
+}
+
+#add .form-add .form-label-foto a {
+  margin-top: 10px;
+}
+
+#add .form-add .btn-img {
+  position: relative;
+  text-align: center;
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-style: dashed;
+  border-color: grey;
+  border-width: 3px;
+  border-radius: 10px;
+  color: grey;
+  text-decoration: none;
+  font-size: 50px;
+}
+#add .form-add .btn-img:hover {
+  border-color: blueviolet;
+  color: blueviolet;
+  background-color: #e2d4f0;
+}
+#add .form-add {
+  margin-left: 300px;
+  margin-right: 400px;
+}
+#add .form_input {
+  width: 595px;
+  border: solid 0.5px #e2d4f0;
+  border-radius: 3px;
+  height: 40px;
+}
+
+#add .form-add .btn-add {
+  background-color: blueviolet;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  width: 200px;
+  height: 30px;
+  margin-top: 50px;
+  position: relative;
+  left: 200px;
+}
+#add .form-add .btn-add:hover {
+  background-color: white;
+  color: blueviolet;
+  border: solid 0.5px blueviolet;
+}
+#add .form_input::-webkit-input-placeholder {
+  margin-left: 10px;
+}
+#add .form-add .file-input {
+  display: none;
+}
+
+#add .form-add .prev-imgs {
+  margin-top: 32px;
+  margin-left: 10px;
+}
+#add .form-add .prev-img {
+  width: 100px;
+  height: 100px;
+}
+
+/* edit product */
+
+#edit .icon-arrow span {
+  font-size: 40px;
+  cursor: pointer;
+}
+#edit .icon-arrow span:hover {
+  color: blueviolet;
+}
+#edit .row {
+  margin-bottom: 20px;
+}
+
+#edit .form-edit .form-label-foto {
+  width: fit-content;
+}
+
+#edit .form-edit .form-label-foto a {
+  margin-top: 10px;
+}
+
+#edit .form-edit .btn-img {
+  position: relative;
+  text-align: center;
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-style: dashed;
+  border-color: grey;
+  border-width: 3px;
+  border-radius: 10px;
+  color: grey;
+  text-decoration: none;
+  font-size: 50px;
+}
+#edit .form-edit .btn-img:hover {
+  border-color: blueviolet;
+  color: blueviolet;
+  background-color: #e2d4f0;
+}
+#edit .form-edit {
+  margin-left: 300px;
+  margin-right: 400px;
+}
+#edit .form_input {
+  width: 595px;
+  border: solid 0.5px #e2d4f0;
+  border-radius: 3px;
+  height: 40px;
+}
+
+#edit .form-edit .btn-edit {
+  background-color: blueviolet;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  width: 200px;
+  height: 30px;
+  margin-top: 50px;
+  position: relative;
+  left: 200px;
+}
+#edit .form-edit .btn-edit:hover {
+  background-color: white;
+  color: blueviolet;
+  border: solid 0.5px blueviolet;
+}
+#edit .form_input::-webkit-input-placeholder {
+  margin-left: 10px;
+}
+#edit .form-edit .file-input {
+  display: none;
+}
+@media (max-width: 900px) {
+  #daftarjual .card-position .card-list-seller {
+    display: none;
+  }
+  #daftarjual .card-position .card-seller {
+    margin-left: 0px;
+  }
+  #daftarjual .hidden-button {
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: space-between;
+  }
+}
+
+/* login register profile fadil */
+
+.login-image {
+  width: 100%;
+  height: 97vh;
+}
+.register-image {
+  width: 100%;
+  height: 97vh;
+}
+.logo-image {
+  width: 120px;
+  height: 50px;
+}
+
+.purple-bg {
+  background-color: #7126b5 !important;
+}
+
+.purple-text {
+  color: #7126b5 !important;
+}
+
+.purple-outline {
+  border: 2px solid #7126b5 !important;
+  border-radius: 5px;
+  background-color: white !important;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-color: #7126b5 !important;
+  color: #7126b5 !important;
+}
+
+.custom-rounded {
+  border-radius: 16px !important;
+}
+
+.plus-icon {
+  border: 2px dashed #d3d3d3;
+  padding: 35px;
+  border-radius: 5px;
+  margin-right: 170px;
+  color: #d3d3d3;
+}
+
+.camera-icon {
+  font-size: 30px;
+  padding: 50px;
+  border-radius: 10px;
+  color: #7126b5;
+  background-color: #e2d4f0;
+}
+
+.image-file {
+  display: none !important;
+  visibility: none !important;
+}
+
+.CamIcon {
+  text-align: center;
+}
+
+.pusher {
+  margin-left: 100px;
+}
+
+@media only screen and (max-width: 480px) {
+  .title-visible {
+    visibility: visible !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .title-visible {
+    visibility: hidden;
+  }
+}
+
+/* Wahyu Hari Susanto */
+
+.body {
+  margin: 0;
+  padding-top: 200px;
+  font-family: "montserrat", sans-serif;
+  min-height: 100vh;
+  background-color: rgb(205, 224, 205);
+}
+
+/* .container {
+  width:100%;
+  position:absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align:center;
+  color: #343434;
+} */
+.not-found1 {
+  margin: 0;
+  text-align: center;
+}
+
+.not-found2 {
+  margin: 0;
+  text-align: center;
+  font-size: 150px;
+  font-weight: 900;
+  letter-spacing: 20px;
+  background: url(../public/images/img2.jpg);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.not-found3 {
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* info penawar fadil */
+
+.logo {
+  margin-bottom: 35px !important;
+}
+.spacing {
+  margin-top: 100px !important;
+  margin-bottom: 100px !important;
+}
+.seller_img {
+  width: 40px;
+  height: 40px;
+}
