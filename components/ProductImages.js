@@ -1,6 +1,6 @@
 const Images = (props) => {
     return (
-        <img src={props.product_img} alt='product_image'/>
+        <img className="slide-product-img" src={props.props.product_img} alt='product_image'/>
     );
   };
   
