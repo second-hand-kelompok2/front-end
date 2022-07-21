@@ -9,6 +9,7 @@ import Images from '../../components/ProductImages';
 const ProductInfo_Buyer = () => {
     const [product, setProduct] = useState([])
     const [images, setImages] = useState([])
+    const [smallImage, setSmallImage] = useState([])
     const router = useRouter()
 
     useEffect(() => {
@@ -20,8 +21,9 @@ const ProductInfo_Buyer = () => {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product/info/${router.query.id}`)
             setProduct(response.data.data[0])
             setImages(response.data.data[0].Images)
-            console.log('Data: ', response.data.data[0])
-            console.log('Images: ', response.data.data[0].Images)
+            setSmallImage(response.data.data[0].Images[0].product_img)
+            // console.log('Data: ', response.data.data[0])
+            // console.log('Images: ', response.data.data[0].Images[0])
             // console.log(router.query.id)
         }
 
@@ -89,7 +91,7 @@ const ProductInfo_Buyer = () => {
                         <h2>Harga tawaranmu akan diketahui penjual. Jika penjual cocok, kamu akan segera dihubungi penjual.</h2>
 
                         <div className={style.info}>
-                            <img src={images[0]} alt='profileImage'/>
+                            <img src={smallImage} alt='profileImage'/>
                             
                             <div>
                                 <h1>{product.product_name}</h1>
