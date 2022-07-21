@@ -89,7 +89,7 @@ const ProductInfo_Buyer = () => {
                         <h2>Harga tawaranmu akan diketahui penjual. Jika penjual cocok, kamu akan segera dihubungi penjual.</h2>
 
                         <div className={style.info}>
-                            <img src={images[0].product_img} alt='profileImage'/>
+                            <img src={images[0]} alt='profileImage'/>
                             
                             <div>
                                 <h1>{product.product_name}</h1>
