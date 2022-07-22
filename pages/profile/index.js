@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import API from "../../services";
-import { useSSRSafeId } from "@react-aria/ssr";
+
 const user =
   typeof window !== "undefined"
     ? JSON.parse(window.localStorage.getItem("user"))
@@ -59,7 +59,7 @@ const DaftarJual = () => {
               <div className="profile-card border border-3 rounded">
                 <div className="profile-img d-inline">
                   <img
-                    src={users?.product_img}
+                    src={users?.profile_img}
                     width="50"
                     height="50"
                     className="rounded"
