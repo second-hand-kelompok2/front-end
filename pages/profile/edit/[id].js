@@ -57,7 +57,9 @@ function Profile() {
     formData.append("phone", phone);
     formData.append("city", city);
     formData.append("address", address);
+    console.log(formData);
     try {
+      console.log(formData)
       await API.post(`/users/profile/update/${router.query.id}`, formData);
     } catch (error) {
       console.log(error);
