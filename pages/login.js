@@ -5,7 +5,6 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Router } from "react-bootstrap-icons";
 import { useRouter } from "next/router";
 
 const Login = () => {
@@ -31,7 +30,6 @@ const Login = () => {
         });
 
         window.localStorage.setItem("token", val.data.data.token);
-        window.localStorage.setItem("id", val.data.data.user.secureuser.id);
         window.localStorage.setItem(
           "user",
           JSON.stringify(val.data.data.user.secureuser)

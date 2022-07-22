@@ -4,13 +4,12 @@ import { useRouter } from "next/router";
 // import _ from "lodash";
 
 const Add = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
-  const [status, setStatus] = useState("");
 
   const [fileInputState, setFileInputState] = useState([]);
   const [previewSource, setPreviewSource] = useState([]);
@@ -77,6 +76,7 @@ const Add = () => {
           token: token,
         },
       });
+      router.push({ pathname: "/profile" });
     } catch (error) {
       console.log(error);
     }
