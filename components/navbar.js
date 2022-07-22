@@ -163,7 +163,9 @@ export function NavbarProfile() {
                             <div className='ToastContainer'>
                                 <Toast className='Toast' onClose={() => setShow(false)} show={show}>
                                     <Toast.Body>
-                                        Woohoo, Belum ada notifikasi !!
+                                    <img src="../images/Rectangle 23.png"></img>
+                                        Jam tangan Cassio
+                                        Rp. 250.000
                                     </Toast.Body>
                                 </Toast>            
                             </div>
@@ -176,6 +178,11 @@ export function NavbarProfile() {
                                 .Toast {
                                     background-color: #ffffff;
                                     border-radius: 25px;
+                                }
+                                .ToastContainer img {
+                                    width: 80px;
+                                    height: 60px;
+                                    border-radius: 10px;
                                 }
                             `}</style>
                         </div>
