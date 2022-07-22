@@ -91,6 +91,7 @@ const Edit = () => {
           token: token,
         },
       });
+      router.push({ pathname: "/profile" });
     } catch (error) {
       console.log(error);
     }
