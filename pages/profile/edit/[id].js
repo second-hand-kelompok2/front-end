@@ -59,7 +59,6 @@ function Profile() {
     formData.append("address", address);
     try {
       await API.post(`/users/profile/update/${router.query.id}`, formData);
-      router.push({ pathname: "/profile" });
     } catch (error) {
       console.log(error);
     }
