@@ -1,5 +1,6 @@
 .carousel {
     width: 700px;
+    height: 380px;
 }
 
 .carousel button {
@@ -8,7 +9,10 @@
 }
 
 .carousel img {
-    width: 600px;
+    width: 480px;
+    height: 340px;
+    border: 1px solid rgb(195, 195, 195);
+    border-radius: 15px;
 }
 
 .productInfo {
@@ -55,6 +59,7 @@
     padding: 14px 24px;
     transition: 0.2s;
     width: 100%;
+    user-select: none;
 }
 
 .productInfo button.btnPurple:hover {
