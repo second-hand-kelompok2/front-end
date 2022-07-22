@@ -29,9 +29,9 @@ const DaftarJual = () => {
 
   // fetch data api
   const getProducts = async () => {
-    const userid = window.localStorage.getItem("id");
+    // const userid = window.localStorage.getItem("user");
     try {
-      const response = await API.get(`/product/${userid}`);
+      const response = await API.get(`/product/${users.id}`);
       console.log(response.data.data);
       setProducts(response.data.data);
     } catch (err) {}
@@ -116,7 +116,9 @@ const DaftarJual = () => {
                 </button>
               </Link>
             </div>
-            {products.map((product) => (
+            {products.length == 0
+              ? "loading"
+              : products.map((product) => (
                   <div className="card-item" key={product.id}>
                     <a
                       className="cardlink"
