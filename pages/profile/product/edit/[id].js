@@ -91,6 +91,7 @@ const Edit = () => {
           token: token,
         },
       });
+      router.push({ pathname: "/profile" });
     } catch (error) {
       console.log(error);
     }
@@ -151,11 +152,11 @@ const Edit = () => {
                     <option selected hidden>
                       Pilih Kategori
                     </option>
-                    <option value="Mobil">Mobil</option>
-                    <option value="Jam Tangan">Jam Tangan</option>
-                    <option value="Monitor">Monitor</option>
-                    <option value="Motor">Motor</option>
-                    <option value="Laptop">Laptop</option>
+                    <option value="Kendaraan">Kendaraan</option>
+                    <option value="Aksesoris">Aksesoris</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Elektronik">Elektronik</option>
                   </select>
                 </div>
               </div>
