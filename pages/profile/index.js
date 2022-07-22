@@ -32,19 +32,19 @@ const DaftarJual = () => {
     const userid = window.localStorage.getItem("id");
     try {
       const response = await API.get(`/product/${userid}`);
-      console.log(response.data);
+      console.log(response.data.data[0]);
       setProducts(response.data.data);
     } catch (err) {}
   };
 
   // fetch data api
-  const getUsers = async () => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/v1/users/`);
-      console.log(response.data);
-      setUsers(response.data.data);
-    } catch (err) {}
-  };
+  // const getUsers = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:5000/api/v1/users/`);
+  //     console.log(response.data);
+  //     setUsers(response.data.data);
+  //   } catch (err) {}
+  // };
 
   return (
     <div>
