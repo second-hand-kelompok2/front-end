@@ -29,9 +29,9 @@ const DaftarJual = () => {
 
   // fetch data api
   const getProducts = async () => {
-    const userid = window.localStorage.getItem("id");
+    // const userid = window.localStorage.getItem("id");
     try {
-      const response = await API.get(`/product/${userid}`);
+      const response = await API.get(`/product/${users.id}`);
       console.log(response.data.data);
       setProducts(response.data.data);
     } catch (err) {}
