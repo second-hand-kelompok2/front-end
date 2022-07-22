@@ -3,10 +3,29 @@ import style from "../../../styles/Info.module.css";
 import { NavbarProfile } from "../../../components/navbar";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import API from "../../../services";
 // import Images from '../../../../components/ProductImages';
 
 const ProductInfo_Seller = () => {
   const router = useRouter();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProductById();
+  }, []);
+  const getProductById = async () => {
+    console.log(router.query.id);
+    const response = await API.get(`/product/info/${router.query.id}`);
+    console.log(response.data.data[0]);
+    console.log(response.data.data);
+    setProducts(response.data.data[0]);
+    // setFileInputState(response.data.data[0].Images);
+    // setName(response.data.data[0].product_name);
+    // setCategory(response.data.data[0].product_category);
+    // setDesc(response.data.data[0].product_desc);
+    // setPrice(response.data.data[0].product_price);
+  };
   return (
     <>
       <NavbarProfile></NavbarProfile>
@@ -47,7 +66,7 @@ const ProductInfo_Seller = () => {
 
         <div className={style.right}>
           <div className={style.top}>
-            <h2>Product Name</h2>
+            <h2>{products.product_name}</h2>
             <p>Category</p>
             <h3>Product Price</h3>
             <button className={style.btnPurple}>Terbitkan</button>

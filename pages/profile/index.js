@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import API from "../../services";
-import { useSSRSafeId } from "@react-aria/ssr";
+
 const user =
   typeof window !== "undefined"
     ? JSON.parse(window.localStorage.getItem("user"))
@@ -29,22 +29,22 @@ const DaftarJual = () => {
 
   // fetch data api
   const getProducts = async () => {
-    const userid = window.localStorage.getItem("id");
+    // const userid = window.localStorage.getItem("id");
     try {
-      const response = await API.get(`/product/${userid}`);
-      console.log(response.data);
+      const response = await API.get(`/product/${users.id}`);
+      console.log(response.data.data);
       setProducts(response.data.data);
     } catch (err) {}
   };
 
   // fetch data api
-  const getUsers = async () => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/v1/users/`);
-      console.log(response.data);
-      setUsers(response.data.data);
-    } catch (err) {}
-  };
+  // const getUsers = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:5000/api/v1/users/`);
+  //     console.log(response.data);
+  //     setUsers(response.data.data);
+  //   } catch (err) {}
+  // };
 
   return (
     <div>
@@ -59,7 +59,7 @@ const DaftarJual = () => {
               <div className="profile-card border border-3 rounded">
                 <div className="profile-img d-inline">
                   <img
-                    src={users?.product_img}
+                    src={users?.profile_img}
                     width="50"
                     height="50"
                     className="rounded"
