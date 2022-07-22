@@ -131,13 +131,13 @@ a {
 #cardlist {
   width: 18rem;
 }
-#cardlist a {
+/* #cardlist a {
   text-decoration: none;
   color: black;
-}
-#cardlist a:hover {
+} */
+/* #cardlist a:hover {
   color: blueviolet;
-}
+} */
 #cardlist hr {
   height: 1px;
 }
