@@ -17,6 +17,12 @@ import Link from "next/link";
 // import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 
 export const NavLogin = () => {
+  const logout = async () => {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user");
+    window.localStorage.removeItem("id");
+    router.push("/login");
+  };
   return (
     <>
       <Navbar className={styles.header} expand="lg">
@@ -48,21 +54,22 @@ export const NavLogin = () => {
           <div>
             <Link href="/">
               <a>
-                <ListUl className={styles.btnIcon}/>
+                <ListUl className={styles.btnIcon} />
               </a>
             </Link>
 
             <Link href="/">
               <a>
-                <Bell className={styles.btnIcon}/>
+                <Bell className={styles.btnIcon} />
               </a>
             </Link>
 
             <Link href="/">
               <a>
-                <Person className={styles.btnIcon}/>
+                <Person className={styles.btnIcon} />
               </a>
             </Link>
+            <font onClick={logout}>Logout</font>
           </div>
         </Container>
       </Navbar>
