@@ -69,7 +69,7 @@ export const NavLogin = () => {
                 <Person className={styles.btnIcon} />
               </a>
             </Link>
-            <font onClick={logout}>Logout</font>
+            
           </div>
         </Container>
       </Navbar>
