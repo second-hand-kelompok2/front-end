@@ -191,7 +191,9 @@ export function NavbarProfile() {
               <img src="../images/fi_user.png"></img>
             </Button>
           </ButtonGroup>
-          <font onClick={logout}>Logout</font>
+          <button type="button" onClick={logout}>
+            Logout
+          </button>
         </Navbar>
       </Container>
     </Navbar>
