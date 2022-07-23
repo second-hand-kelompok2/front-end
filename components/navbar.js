@@ -4,6 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Navbar from "react-bootstrap/Navbar";
 import Toast from "react-bootstrap/Toast";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 export function NavbarDefault() {
   return (
@@ -58,6 +59,7 @@ export function NavbarInfoPenawar() {
 }
 
 export function NavbarProfile() {
+  const router = useRouter();
   const logout = async () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
