@@ -26,6 +26,12 @@ const user =
 
 export const NavNoLogin = () => {
   const router = useRouter();
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    setUsers(user);
+    console.log(user);
+  }, [user]);
 
   const logout = async () => {
     window.localStorage.removeItem("token");
@@ -56,7 +62,7 @@ export const NavNoLogin = () => {
               <button type="search" className={styles.btnsearch}><Search className={styles.iconsearch}/></button>
             </Form.Group> */}
           </div>
-          {user > 0 ? (
+          {users > 0 ? (
             <Navbar>
               <ButtonGroup aria-label="Basic example" className="">
                 <Button variant="outline-light" href="#">
