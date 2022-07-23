@@ -163,7 +163,7 @@ export function NavbarProfile() {
                             <div className='ToastContainer'>
                                 <Toast className='Toast' onClose={() => setShow(false)} show={show}>
                                     <Toast.Body>
-                                        Woohoo, Belum ada notifikasi !!
+                                        Jam tangan
                                     </Toast.Body>
                                 </Toast>            
                             </div>
