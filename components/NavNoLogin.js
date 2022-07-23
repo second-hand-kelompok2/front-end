@@ -22,7 +22,12 @@ export const NavNoLogin = () => {
         <Container className={styles.container}>
           <div className={styles.box1}>
             <NavbarBrand href="/">
-              <img src="/images/logo.png" alt="logo" width="100px" height="34px"/>
+              <img
+                src="/images/logo.png"
+                alt="logo"
+                width="100px"
+                height="34px"
+              />
             </NavbarBrand>
 
             {/* <Form.Group className={styles.search}>
@@ -32,7 +37,12 @@ export const NavNoLogin = () => {
           </div>
           <div>
             <Button href="/login" className={styles.btn}>
-              <img src="/images/fi_log-in.png" alt="icon" width="23px" height="23px"/>
+              <img
+                src="/images/fi_log-in.png"
+                alt="icon"
+                width="23px"
+                height="23px"
+              />
               <p className={styles.txt}>Masuk</p>
             </Button>
           </div>

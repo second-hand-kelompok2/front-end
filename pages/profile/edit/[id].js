@@ -51,15 +51,17 @@ function Profile() {
 
   const handleSubmitFile = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("profile_img", fileInputState);
+    formData.append("phone", phone);
+    formData.append("city", city);
+    formData.append("address", address);
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("profile_img", fileInputState);
-      formData.append("phone", phone);
-      formData.append("city", city);
-      formData.append("address", address);
       console.log("kata", formData);
       await API.post(`/users/profile/update/${router.query.id}`, formData);
+      router.push("/profile");
+      console.log("success");
     } catch (error) {
       console.log(error);
     }
