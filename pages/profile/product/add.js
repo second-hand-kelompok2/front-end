@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../../../services";
 import { useRouter } from "next/router";
+import { Form } from "react-bootstrap";
+import Link from "next/link";
 // import _ from "lodash";
 
 const Add = () => {
@@ -76,7 +78,7 @@ const Add = () => {
           token: token,
         },
       });
-      router.push({ pathname: "/profile" });
+      router.push("/profile");
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +89,9 @@ const Add = () => {
       <div className="row">
         <div className="col-12 mb-3">
           <p className="icon-arrow mt-5 h2 fw-bold">
-            <span>&larr;</span>
+            <Link href={`/profile`}>
+              <span>&larr;</span>
+            </Link>
           </p>
           <div className="form-add">
             <form onSubmit={handleSubmitFile}>
@@ -97,7 +101,7 @@ const Add = () => {
                 </label>
                 <div>
                   <input
-                    className="form_input"
+                    className="form_input custom-rounded p-2"
                     type="text"
                     id="nama_produk"
                     name="nama_produk"
@@ -113,7 +117,7 @@ const Add = () => {
                 </label>
                 <div>
                   <input
-                    className="form_input"
+                    className="form_input custom-rounded p-2"
                     type="text"
                     id="harga_produk"
                     name="harga_produk"
@@ -129,7 +133,7 @@ const Add = () => {
                 </label>
                 <div>
                   <select
-                    class="form-select"
+                    class="form-select custom-rounded p-2"
                     name="kategori"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -151,7 +155,7 @@ const Add = () => {
                 </label>
                 <div>
                   <textarea
-                    className="form_input form-control"
+                    className="form-control custom-rounded p-2"
                     id="deskripsi"
                     name="deskripsi"
                     value={desc}
@@ -203,4 +207,5 @@ const Add = () => {
     </div>
   );
 };
+
 export default Add;
