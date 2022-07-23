@@ -1,9 +1,10 @@
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import styles from "../styles/NavNoLogin.module.css";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Navbar from "react-bootstrap/Navbar";
 import Toast from "react-bootstrap/Toast";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export function NavbarDefault() {
@@ -57,15 +58,16 @@ export function NavbarInfoPenawar() {
     </Navbar>
   );
 }
-
 export function NavbarProfile() {
   const router = useRouter();
+
   const logout = async () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("user");
     window.localStorage.removeItem("id");
     router.push("/login");
   };
+
   const [show, setShow] = useState(true);
 
   const toggleShow = () => setShow(!show);
@@ -193,9 +195,15 @@ export function NavbarProfile() {
               <img src="../images/fi_user.png"></img>
             </Button>
           </ButtonGroup>
-          <button type="button" onClick={logout}>
-            Logout
-          </button>
+          <Button className={styles.btn} onClick={logout}>
+            <p className={styles.txt}>Logout</p>
+            <img
+              src="/images/fi_log-in.png"
+              alt="icon"
+              width="23px"
+              height="23px"
+            />
+          </Button>
         </Navbar>
       </Container>
     </Navbar>
