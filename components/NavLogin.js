@@ -17,12 +17,6 @@ import Link from "next/link";
 // import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 
 export const NavLogin = () => {
-  const logout = async () => {
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("user");
-    window.localStorage.removeItem("id");
-    router.push("/login");
-  };
   return (
     <>
       <Navbar className={styles.header} expand="lg">

@@ -34,6 +34,7 @@ const DaftarJual = () => {
     try {
       const response = await API.get(`/product/${userid}`);
       console.log(response.data.data);
+      console.log(userid);
       setProducts(response.data.data);
     } catch (err) {}
   };
@@ -158,9 +159,8 @@ const DaftarJual = () => {
                 </button>
               </Link>
             </div>
-            {products.length == 0
-              ? "loading"
-              : products.map((product) => (
+            {products
+              ? products.map((product) => (
                   <div className="card-item" key={product.id}>
                     <a
                       className="cardlink"
@@ -190,7 +190,8 @@ const DaftarJual = () => {
                       </div>
                     </a>
                   </div>
-                ))}
+                ))
+              : "empty"}
           </div>
         </div>
       </div>
