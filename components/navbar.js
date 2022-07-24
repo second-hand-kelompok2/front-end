@@ -75,6 +75,30 @@ export function NavbarProfile() {
 
   const popoverClick = (
     <Popover id="popover-trigger-click" title="Popover bottom">
+      {/* <Row>
+        {post
+          .slice(0, 3)
+          .map((post) => (
+            <Stack direction="horizontal" gap={3}>
+              <img
+                src={`http://localhost:2000/public/files/${post.picture}`}
+                alt=""
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                }}
+              />
+              <Stack>
+                <p className="m-0 text-black-50">{postStatus}</p>
+                <p className="m-0 fw-bold text-black">{post.name}</p>
+              </Stack>
+              <p className="ms-auto fw-bold text-black">{post.createdAt}</p>
+            </Stack>
+          ))
+          .reverse()}
+      </Row> */}
       <div className="d-flex notif1">
         <img src="../images/image-casio1.png"></img>
         <div>
@@ -117,7 +141,7 @@ export function NavbarProfile() {
           }
         `}</style>
       </div>
-      <hr/>
+      <hr />
       <div className="d-flex notif1">
         <img src="../images/image-casio1.png"></img>
         <div>
