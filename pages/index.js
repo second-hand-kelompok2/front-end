@@ -6,6 +6,7 @@ import Layout from "../components/General"
 import HomeBanner from "../components/HomeBanner"
 import ListProduct from "../components/ListProduct"
 import { NavNoLogin } from "../components/NavNoLogin"
+import { NavLogin } from "../components/NavLogin"
 import { Container } from "react-bootstrap"
 
 export default function Home() {
