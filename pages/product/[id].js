@@ -33,7 +33,7 @@ const ProductInfo_Buyer = () => {
             console.log(err)
         }
     }
-=======
+    
   const [product, setProduct] = useState([]);
   const [images, setImages] = useState([]);
   const [smallImage, setSmallImage] = useState([]);
