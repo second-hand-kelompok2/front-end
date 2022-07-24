@@ -110,7 +110,7 @@ export default function ListProduct() {
         </div>
         
         <div className={styles.produkContainer}>
-          {/* { productList.map((item) => <CardProduct key={item.id} props={item}/>) } */}
+          { productList.map((item) => <CardProduct key={item.id} props={item}/>) }
         </div>
       </Container>
     </>
