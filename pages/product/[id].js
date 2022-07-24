@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { NavbarProfile } from "../../components/navbar";
 import Images from "../../components/ProductImages";
 
-const ProductInfo_Buyer = () => {
+const ProductInfo_Buyer = () => {    
   const [product, setProduct] = useState([]);
   const [images, setImages] = useState([]);
   const [smallImage, setSmallImage] = useState([]);
