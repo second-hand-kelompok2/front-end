@@ -7,34 +7,6 @@ import { NavbarProfile } from "../../components/navbar";
 import Images from "../../components/ProductImages";
 
 const ProductInfo_Buyer = () => {
-<<<<<<< HEAD
-    const [product, setProduct] = useState([])
-    const [images, setImages] = useState([])
-    const [smallImage, setSmallImage] = useState([])
-    const [user, setUser] = useState([])
-    const router = useRouter()
-
-    useEffect(() => {
-        getProduct()
-    }, [])
-
-    const getProduct = async () => {
-        try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product/info/${router.query.id}`)
-            setProduct(response.data.data[0])
-            setImages(response.data.data[0].Images)
-            setSmallImage(response.data.data[0].Images[0].product_img)
-            setUser(response.data.data[0].User)
-            console.log('User: ', response.data.data[0].User)
-            // console.log('Images: ', response.data.data[0].Images[0])
-            // console.log(router.query.id)
-        }
-
-        catch(err) {
-            console.log(err)
-        }
-    }
-=======
   const [product, setProduct] = useState([]);
   const [images, setImages] = useState([]);
   const [smallImage, setSmallImage] = useState([]);
@@ -45,7 +17,6 @@ const ProductInfo_Buyer = () => {
   useEffect(() => {
     getProduct();
   }, []);
->>>>>>> 03e65bd19921e895a4df62d1998106258b98b69f
 
   const getProduct = async () => {
     try {
@@ -89,24 +60,6 @@ const ProductInfo_Buyer = () => {
             </Carousel>
           </div>
 
-<<<<<<< HEAD
-            <div className={style.right}>
-                <div className={style.top}>
-                    <h2>{product.product_name}</h2>
-                    <p>{product.product_category}</p>
-                    <h3>Rp {product.product_price}</h3>
-                    <button className={style.btnPurple} onClick={changeDisplay}>Saya tertarik dan ingin nego</button>
-                </div>
-                
-                <div className={style.bottom}>
-                    <img src='/images/sample_profile_small.png' alt='profileImage'/>
-                    
-                    <div className={style.sellerInfo}>
-                        <h1>{user.name}</h1>
-                        <h4>{user.city}</h4>
-                    </div>
-                </div>
-=======
           <div className={style.bottom}>
             <h1>Deskripsi</h1>
             <p>{product.product_desc}</p>
@@ -139,7 +92,6 @@ const ProductInfo_Buyer = () => {
             <div className={style.sellerInfo}>
               <h1>{user.name}</h1>
               <h4>{user.city}</h4>
->>>>>>> 03e65bd19921e895a4df62d1998106258b98b69f
             </div>
           </div>
         </div>
