@@ -27,7 +27,6 @@ function Profile() {
     console.log(router.query.id);
     const response = await API.get(`/users/${router.query.id}`);
     console.log(response.data.data[0]);
-    setFileInputState(response.data.data[0].profile_img);
     setName(response.data.data[0].name);
     setCity(response.data.data[0].city);
     setAddress(response.data.data[0].address);
@@ -57,6 +56,7 @@ function Profile() {
     formData.append("phone", phone);
     formData.append("city", city);
     formData.append("address", address);
+
     try {
       console.log("kata", formData);
       await API.post(`/users/profile/update/${router.query.id}`, formData);
@@ -71,8 +71,7 @@ function Profile() {
     <Row>
       <Nav className="navbar navbar-expand-lg shadow p-3 mb-5 bg-body rounded">
         <div className="container-fluid">
-          <div className="navbar-brand flex-grow-1">
-          </div>
+          <div className="navbar-brand flex-grow-1"></div>
           <div className="mx-auto ">
             <h3 className="fw-bold">Lengkapi Info Akun</h3>
           </div>
@@ -80,35 +79,42 @@ function Profile() {
         </div>
       </Nav>
       <Col md={6} className="my-auto mx-auto">
-        {!selectedFile ? (
-          <div className="mx-auto my-auto CamIcon">
-            <label htmlFor="file-upload">
-              <FontAwesomeIcon
-                icon={faCamera}
-                id="btnIcon"
-                className="camera-icon"
-              />
-            </label>
-            <input
-              id="file-upload"
-              name="profile_img"
-              onChange={handleFileInputChange}
-              type="file"
-              className="custom-rounded p-2 image-file"
-            />
-          </div>
-        ) : (
-          <div className="mx-auto my-auto CamIcon">
-            <img
-              className="custom-rounded"
-              style={{ width: 130 }}
-              src={previewSource}
-              alt="uploaded-img"
-            ></img>
-          </div>
-        )}
         <div className="mx-auto w-75">
           <Form onSubmit={handleSubmitFile}>
+            {!selectedFile ? (
+              <div className="mx-auto my-auto CamIcon">
+                <label htmlFor="file-upload">
+                  <FontAwesomeIcon
+                    icon={faCamera}
+                    id="btnIcon"
+                    className="camera-icon"
+                  />
+                </label>
+                <input
+                  id="file-upload"
+                  name="profile_img"
+                  onChange={handleFileInputChange}
+                  type="file"
+                  className="custom-rounded p-2 image-file"
+                />
+              </div>
+            ) : (
+              <div className="mx-auto my-auto CamIcon">
+                <img
+                  className="custom-rounded"
+                  style={{ width: 130 }}
+                  src={previewSource}
+                  alt="uploaded-img"
+                ></img>
+                <input
+                  id="file-upload"
+                  name="profile_img"
+                  onChange={handleFileInputChange}
+                  type="file"
+                  className="custom-rounded p-2 image-file"
+                />
+              </div>
+            )}
             <Form.Group controlId="name" className="mt-3">
               <Form.Label className="fw-bold">Nama </Form.Label>
               <Form.Control

@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 import { Search } from "react-bootstrap-icons";
 // import { CheckLg } from "react-bootstrap-icons";
 // import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
-import Link from "next/link"
+import Link from "next/link";
 
 const user =
   typeof window !== "undefined" ? window.localStorage.getItem("id") : {};
@@ -50,7 +50,12 @@ export const NavNoLogin = () => {
         <Container className={styles.container}>
           <div className={styles.box1}>
             <NavbarBrand href="/">
-              <img src="/images/Secondhandlogo.png" alt="logo" width="135px" height="45px"/>
+              <img
+                src="/images/Secondhandlogo.png"
+                alt="logo"
+                width="135px"
+                height="45px"
+              />
             </NavbarBrand>
 
             {/* <Form.Group className={styles.search}>
@@ -91,8 +96,8 @@ export const NavNoLogin = () => {
                 </div>
                 <Link href={"/profile"}>
                   <Button variant="outline-light" href="#">
-                  <img src="../images/fi_user.png"></img>
-                </Button>
+                    <img src="../images/fi_user.png"></img>
+                  </Button>
                 </Link>
               </ButtonGroup>
               <Button className={styles.btn} onClick={logout}>
@@ -117,9 +122,14 @@ export const NavNoLogin = () => {
                 <p className={styles.txt}>Masuk</p>
               </Button>
               <Button href="/register" className={styles.btn}>
-            <img src="/images/iconregister.png" alt="icon" width="23px" height="23px"/>
-              <p className={styles.txt}>Register</p>
-            </Button>
+                <img
+                  src="/images/iconregister.png"
+                  alt="icon"
+                  width="23px"
+                  height="23px"
+                />
+                <p className={styles.txt}>Register</p>
+              </Button>
             </div>
           )}
         </Container>

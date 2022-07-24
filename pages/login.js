@@ -30,10 +30,10 @@ const Login = () => {
         });
 
         window.localStorage.setItem("token", val.data.data.token);
-        window.localStorage.setItem("id", val.data.data.user.secureuser.id);
+        window.localStorage.setItem("id", val.data.data.secureuser.id);
         window.localStorage.setItem(
           "user",
-          JSON.stringify(val.data.data.user.secureuser)
+          JSON.stringify(val.data.data.secureuser)
         );
         console.log(val.data.data.user);
         router.push({ pathname: "/" });
