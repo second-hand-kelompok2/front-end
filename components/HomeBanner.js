@@ -5,8 +5,8 @@ import { Carousel, Container } from "react-bootstrap";
 
 const imageBanner = [
   { id: 1, image: "/images/banner1.png" },
-  { id: 2, image: "/images/banner1.png" },
-  { id: 3, image: "/images/banner1.png" },
+  { id: 2, image: "/images/banner2.png" },
+  { id: 3, image: "/images/banner3.png" },
 ];
 
 export default function HomeBanner() {

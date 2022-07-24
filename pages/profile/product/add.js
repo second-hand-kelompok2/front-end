@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../../../services";
 import { useRouter } from "next/router";
-import { NavbarDefault } from "../../../components/navbar";
+import { Form } from "react-bootstrap";
+import Link from "next/link";
 // import _ from "lodash";
 
 const Add = () => {
@@ -77,24 +78,101 @@ const Add = () => {
           token: token,
         },
       });
-      router.push({ pathname: "/profile" });
+      router.push("/profile");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-      <div id="add" className="container content position-relative">
-        <div className="row">
-          <div className="col-12 mb-3">
-            <p className="icon-arrow mt-5 h2 fw-bold">
+    <div id="add" className="container content position-relative">
+      <div className="row">
+        <div className="col-12 mb-3">
+          <p className="icon-arrow mt-5 h2 fw-bold">
+            <Link href={`/profile`}>
               <span>&larr;</span>
-            </p>
-            <div className="form-add">
-              <form onSubmit={handleSubmitFile}>
-                <div className="row">
-                  <label className="form-label" for="nama_produk">
-                    Nama Produk
+            </Link>
+          </p>
+          <div className="form-add">
+            <form onSubmit={handleSubmitFile}>
+              <div className="row">
+                <label className="form-label" for="nama_produk">
+                  Nama Produk
+                </label>
+                <div>
+                  <input
+                    className="form_input custom-rounded p-2"
+                    type="text"
+                    id="nama_produk"
+                    name="nama_produk"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Nama Produk"
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <label className="form-label" for="harga_produk">
+                  Harga Produk
+                </label>
+                <div>
+                  <input
+                    className="form_input custom-rounded p-2"
+                    type="text"
+                    id="harga_produk"
+                    name="harga_produk"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    placeholder="Rp 0.00"
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <label className="form-label" for="kategori">
+                  Kategori
+                </label>
+                <div>
+                  <select
+                    class="form-select custom-rounded p-2"
+                    name="kategori"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                  >
+                    <option selected hidden>
+                      Pilih Kategori
+                    </option>
+                    <option value="Kendaraan">Kendaraan</option>
+                    <option value="Aksesoris">Aksesoris</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Elektronik">Elektronik</option>
+                  </select>
+                </div>
+              </div>
+              <div className="row">
+                <label className="form-label" for="deskripsi">
+                  Deskripsi
+                </label>
+                <div>
+                  <textarea
+                    className="form-control custom-rounded p-2"
+                    id="deskripsi"
+                    name="deskripsi"
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    placeholder="Contoh : Ikan Hiu 33"
+                  />
+                </div>
+              </div>
+              <div className="row">
+                {/* <SingleUploader/> */}
+                <div className="d-flex">
+                  <label className="form-label-foto" for="foto_produk">
+                    Foto Produk
+                    <br />
+                    <a class="btn-img" rel="nofollow">
+                      +
+                    </a>
                   </label>
                   <div>
                     <input
@@ -197,11 +275,13 @@ const Add = () => {
                 <button type="submit" className="btn-add">
                   Terbitkan
                 </button>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
     </div>
   );
 };
+
 export default Add;
