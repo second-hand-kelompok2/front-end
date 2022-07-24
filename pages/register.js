@@ -81,7 +81,7 @@ const Register = () => {
               />
             </Form.Group>
             <Form.Group controlId="confPassword" className="mt-3">
-              <Form.Label>confirmPassword</Form.Label>
+              <Form.Label>Konfirmasi Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Masukkan password"

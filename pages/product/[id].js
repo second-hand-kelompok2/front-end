@@ -10,6 +10,7 @@ const ProductInfo_Buyer = () => {
     const [product, setProduct] = useState([])
     const [images, setImages] = useState([])
     const [smallImage, setSmallImage] = useState([])
+    const [user, setUser] = useState([])
     const router = useRouter()
 
     useEffect(() => {
@@ -22,7 +23,8 @@ const ProductInfo_Buyer = () => {
             setProduct(response.data.data[0])
             setImages(response.data.data[0].Images)
             setSmallImage(response.data.data[0].Images[0].product_img)
-            // console.log('Data: ', response.data.data[0])
+            setUser(response.data.data[0].User)
+            console.log('User: ', response.data.data[0].User)
             // console.log('Images: ', response.data.data[0].Images[0])
             // console.log(router.query.id)
         }
@@ -76,8 +78,8 @@ const ProductInfo_Buyer = () => {
                     <img src='/images/sample_profile_small.png' alt='profileImage'/>
                     
                     <div className={style.sellerInfo}>
-                        <h1>Nama Penjual</h1>
-                        <h4>Kota</h4>
+                        <h1>{user.name}</h1>
+                        <h4>{user.city}</h4>
                     </div>
                 </div>
             </div>

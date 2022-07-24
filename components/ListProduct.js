@@ -78,9 +78,27 @@ export default function ListProduct() {
               </Button>
             </a>
             <a>
-              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Hobi")}>
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Aksesoris")}>
                 <Search className={styles.icon} />
-                <p className={styles.text}>Hobi</p>
+                <p className={styles.text}>Aksesoris</p>
+              </Button>
+            </a>
+            <a>
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Elektronik")}>
+                <Search className={styles.icon} />
+                <p className={styles.text}>Elektronik</p>
+              </Button>
+            </a>
+            <a>
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Fashion")}>
+                <Search className={styles.icon} />
+                <p className={styles.text}>Fashion</p>
+              </Button>
+            </a>
+            <a>
+              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Furniture")}>
+                <Search className={styles.icon} />
+                <p className={styles.text}>Furniture</p>
               </Button>
             </a>
             <a>
@@ -89,22 +107,10 @@ export default function ListProduct() {
                 <p className={styles.text}>Kendaraan</p>
               </Button>
             </a>
-            <a>
-              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Baju")}>
-                <Search className={styles.icon} />
-                <p className={styles.text}>Baju</p>
-              </Button>
-            </a>
-            <a>
-              <Button className={styles.btnFilterActive} type="search" onClick={(event) => handleFilter(event, "Aksesoris")}>
-                <Search className={styles.icon} />
-                <p className={styles.text}>Aksesoris</p>
-              </Button>
-            </a>
         </div>
         
         <div className={styles.produkContainer}>
-          { productList.map((item) => <CardProduct key={item.id} props={item}/>) }
+          {/* { productList.map((item) => <CardProduct key={item.id} props={item}/>) } */}
         </div>
       </Container>
     </>
