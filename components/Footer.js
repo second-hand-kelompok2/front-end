@@ -9,9 +9,9 @@ export default function Footer() {
       <div className={styles.footer}>
         <Container className={styles.container}>
           <div className={styles.item}>
-            <p className={styles.text}>Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000</p>
-            <p className={styles.text}>aryrmdn26@gmail.com </p>
-            <p className={styles.text}>081-233-334-808</p>
+            <p className={styles.text}>19 Jalan Kemang I 10, RT.10/RW.5, 5, Bangka, Mampang Prapatan, South Jakarta City</p>
+            <p className={styles.text}>secondhand@gmail.com</p>
+            <p className={styles.text}>+62 812-2534-0414</p>
           </div>
 
           <div className={styles.item}>
@@ -74,7 +74,7 @@ export default function Footer() {
             <p className={styles.text}>Copyright FSW6-Group3 2022</p>
             <a href="index.html">
               <img
-                src="/images/logo.png"
+                src="/images/Secondhandlogo.png"
                 alt="logo"
                 className={styles.logo}
               />

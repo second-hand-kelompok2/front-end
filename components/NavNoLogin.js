@@ -22,7 +22,7 @@ export const NavNoLogin = () => {
         <Container className={styles.container}>
           <div className={styles.box1}>
             <NavbarBrand href="/">
-              <img src="/images/logo.png" alt="logo" width="100px" height="34px"/>
+              <img src="/images/Secondhandlogo.png" alt="logo" width="135px" height="45px"/>
             </NavbarBrand>
 
             {/* <Form.Group className={styles.search}>
@@ -30,10 +30,14 @@ export const NavNoLogin = () => {
               <button type="search" className={styles.btnsearch}><Search className={styles.iconsearch}/></button>
             </Form.Group> */}
           </div>
-          <div>
+          <div className="row">
             <Button href="/login" className={styles.btn}>
               <img src="/images/fi_log-in.png" alt="icon" width="23px" height="23px"/>
               <p className={styles.txt}>Masuk</p>
+            </Button>
+            <Button href="/register" className={styles.btn}>
+            <img src="/images/iconregister.png" alt="icon" width="23px" height="23px"/>
+              <p className={styles.txt}>Register</p>
             </Button>
           </div>
         </Container>

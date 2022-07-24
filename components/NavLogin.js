@@ -24,10 +24,10 @@ export const NavLogin = () => {
           <div className={styles.box1}>
             <NavbarBrand href="/">
               <img
-                src="/images/logo.png"
+                src="/images/Secondhandlogo.png"
                 alt="logo"
-                width="100px"
-                height="34px"
+                width="135px"
+                height="45px"
               />
             </NavbarBrand>
 
