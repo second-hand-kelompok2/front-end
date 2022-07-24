@@ -24,10 +24,10 @@ export const NavLogin = () => {
           <div className={styles.box1}>
             <NavbarBrand href="/">
               <img
-                src="/images/logo.png"
+                src="/images/Secondhandlogo.png"
                 alt="logo"
-                width="100px"
-                height="34px"
+                width="135px"
+                height="45px"
               />
             </NavbarBrand>
 
@@ -48,21 +48,22 @@ export const NavLogin = () => {
           <div>
             <Link href="/">
               <a>
-                <ListUl className={styles.btnIcon}/>
+                <ListUl className={styles.btnIcon} />
               </a>
             </Link>
 
             <Link href="/">
               <a>
-                <Bell className={styles.btnIcon}/>
+                <Bell className={styles.btnIcon} />
               </a>
             </Link>
 
             <Link href="/">
               <a>
-                <Person className={styles.btnIcon}/>
+                <Person className={styles.btnIcon} />
               </a>
             </Link>
+            
           </div>
         </Container>
       </Navbar>

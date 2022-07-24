@@ -58,8 +58,10 @@ function Profile() {
     formData.append("city", city);
     formData.append("address", address);
     try {
+      console.log("kata", formData);
       await API.post(`/users/profile/update/${router.query.id}`, formData);
-      router.push({ pathname: "/profile" });
+      router.push("/profile");
+      console.log("success");
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +72,6 @@ function Profile() {
       <Nav className="navbar navbar-expand-lg shadow p-3 mb-5 bg-body rounded">
         <div className="container-fluid">
           <div className="navbar-brand flex-grow-1">
-            <LogoImage />
           </div>
           <div className="mx-auto ">
             <h3 className="fw-bold">Lengkapi Info Akun</h3>
@@ -114,7 +115,7 @@ function Profile() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Nama"
+                placeholder="Masukan nama anda"
                 className="custom-rounded p-2"
               />
             </Form.Group>
@@ -124,7 +125,7 @@ function Profile() {
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                placeholder="Contoh: johndee@gmail.com"
+                placeholder="Masukan nama kota anda"
                 className="custom-rounded p-2"
               />
             </Form.Group>
@@ -134,7 +135,7 @@ function Profile() {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 className="form-control custom-rounded p-2"
-                placeholder="Contoh: Jalan Ikan Hiu 33"
+                placeholder="Masukan alamat anda"
               ></textarea>
             </Form.Group>
             <Form.Group controlId="hp" className="mt-3">
@@ -143,7 +144,7 @@ function Profile() {
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="contoh: +628123456789"
+                placeholder="Masukan No. Handphone anda"
                 className="custom-rounded p-2"
               />
             </Form.Group>
