@@ -1,9 +1,10 @@
 import Card from "../../components/seller/card";
 import CardList from "../../components/seller/cardlist";
 import React, { useState, useEffect } from "react";
-import { NavbarProfile } from "../../components/navbar";
+import axios from "axios";
 import Link from "next/link";
 import API from "../../services";
+import { NavbarProfile } from "../../components/navbar";
 
 const user =
   typeof window !== "undefined"
@@ -50,7 +51,8 @@ const DaftarJual = () => {
 
   return (
     <div>
-      <NavbarProfile></NavbarProfile>
+      {/* <Header /> */}
+      <NavbarProfile/>
       <div id="daftarjual" className="container content position-relative">
         <div className="row">
           <div className="col-12 d-flex mb-3">
@@ -110,8 +112,7 @@ const DaftarJual = () => {
                 <p className="kategori card-text fw-bold">Kategori</p>
                 <p className="semua-prod card-text">
                   <a className="active" href="/profile">
-                    Semua Produk{" "}
-                    <i className="icon-gt fw-bold float-end">&gt;</i>
+                    Semua Produk <i className="icon-gt fw-bold float-end">&gt;</i>
                   </a>
                 </p>
                 <hr />
@@ -128,15 +129,15 @@ const DaftarJual = () => {
                 </p>
                 <style jsx>{`
                   /* Style the buttons */
-                  .active {
+                  .active{
                     text-decoration: none;
                     color: blueviolet;
                   }
-                  .active:hover {
+                  .active:hover{
                     color: black;
                   }
                   /* Style the active class (and buttons on mouse-over) */
-                  .buton {
+                  .buton{
                     color: black;
                     text-decoration: none;
                   }
