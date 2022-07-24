@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../../../services";
 import { useRouter } from "next/router";
+import { NavbarDefault } from "../../../components/navbar";
 // import _ from "lodash";
 
 const Add = () => {
@@ -83,123 +84,123 @@ const Add = () => {
   };
 
   return (
-    <div id="add" className="container content position-relative">
-      <div className="row">
-        <div className="col-12 mb-3">
-          <p className="icon-arrow mt-5 h2 fw-bold">
-            <span>&larr;</span>
-          </p>
-          <div className="form-add">
-            <form onSubmit={handleSubmitFile}>
-              <div className="row">
-                <label className="form-label" for="nama_produk">
-                  Nama Produk
-                </label>
-                <div>
-                  <input
-                    className="form_input"
-                    type="text"
-                    id="nama_produk"
-                    name="nama_produk"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Nama Produk"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <label className="form-label" for="harga_produk">
-                  Harga Produk
-                </label>
-                <div>
-                  <input
-                    className="form_input"
-                    type="text"
-                    id="harga_produk"
-                    name="harga_produk"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    placeholder="Rp 0.00"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <label className="form-label" for="kategori">
-                  Kategori
-                </label>
-                <div>
-                  <select
-                    class="form-select"
-                    name="kategori"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    <option selected hidden>
-                      Pilih Kategori
-                    </option>
-                    <option value="Kendaraan">Kendaraan</option>
-                    <option value="Aksesoris">Aksesoris</option>
-                    <option value="Furniture">Furniture</option>
-                    <option value="Fashion">Fashion</option>
-                    <option value="Elektronik">Elektronik</option>
-                  </select>
-                </div>
-              </div>
-              <div className="row">
-                <label className="form-label" for="deskripsi">
-                  Deskripsi
-                </label>
-                <div>
-                  <textarea
-                    className="form_input form-control"
-                    id="deskripsi"
-                    name="deskripsi"
-                    value={desc}
-                    onChange={(e) => setDesc(e.target.value)}
-                    placeholder="Contoh : Ikan Hiu 33"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                {/* <SingleUploader/> */}
-                <div className="d-flex">
-                  <label className="form-label-foto" for="foto_produk">
-                    Foto Produk
-                    <br />
-                    <a class="btn-img" rel="nofollow">
-                      +
-                    </a>
+      <div id="add" className="container content position-relative">
+        <div className="row">
+          <div className="col-12 mb-3">
+            <p className="icon-arrow mt-5 h2 fw-bold">
+              <span>&larr;</span>
+            </p>
+            <div className="form-add">
+              <form onSubmit={handleSubmitFile}>
+                <div className="row">
+                  <label className="form-label" for="nama_produk">
+                    Nama Produk
                   </label>
-                  {previewSource.length > 0
-                    ? previewSource.map((preview, idx) => (
-                        <div key={idx} className="prev-imgs">
-                          <img
-                            className="prev-img"
-                            alt="chosen"
-                            src={preview}
-                          />
-                        </div>
-                      ))
-                    : null}
                   <div>
                     <input
-                      className="file-input"
-                      type="file"
-                      multiple
-                      id="foto_produk"
-                      name="product_img"
-                      onChange={handleFileInputChange}
+                      className="form_input"
+                      type="text"
+                      id="nama_produk"
+                      name="nama_produk"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Nama Produk"
                     />
                   </div>
                 </div>
-              </div>
-              <button type="submit" className="btn-add">
-                Terbitkan
-              </button>
-            </form>
+                <div className="row">
+                  <label className="form-label" for="harga_produk">
+                    Harga Produk
+                  </label>
+                  <div>
+                    <input
+                      className="form_input"
+                      type="text"
+                      id="harga_produk"
+                      name="harga_produk"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      placeholder="Rp 0.00"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <label className="form-label" for="kategori">
+                    Kategori
+                  </label>
+                  <div>
+                    <select
+                      class="form-select"
+                      name="kategori"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option selected hidden>
+                        Pilih Kategori
+                      </option>
+                      <option value="Kendaraan">Kendaraan</option>
+                      <option value="Aksesoris">Aksesoris</option>
+                      <option value="Furniture">Furniture</option>
+                      <option value="Fashion">Fashion</option>
+                      <option value="Elektronik">Elektronik</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="row">
+                  <label className="form-label" for="deskripsi">
+                    Deskripsi
+                  </label>
+                  <div>
+                    <textarea
+                      className="form_input form-control"
+                      id="deskripsi"
+                      name="deskripsi"
+                      value={desc}
+                      onChange={(e) => setDesc(e.target.value)}
+                      placeholder="Contoh : Ikan Hiu 33"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  {/* <SingleUploader/> */}
+                  <div className="d-flex">
+                    <label className="form-label-foto" for="foto_produk">
+                      Foto Produk
+                      <br />
+                      <a class="btn-img" rel="nofollow">
+                        +
+                      </a>
+                    </label>
+                    {previewSource.length > 0
+                      ? previewSource.map((preview, idx) => (
+                          <div key={idx} className="prev-imgs">
+                            <img
+                              className="prev-img"
+                              alt="chosen"
+                              src={preview}
+                            />
+                          </div>
+                        ))
+                      : null}
+                    <div>
+                      <input
+                        className="file-input"
+                        type="file"
+                        multiple
+                        id="foto_produk"
+                        name="product_img"
+                        onChange={handleFileInputChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" className="btn-add">
+                  Terbitkan
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
