@@ -8,35 +8,35 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export function NavbarDefault() {
-  return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Button variant="outline-light" href="/" className="me-5">
-          <img src="../images/navbar.png"></img>
-        </Button>
-      </Container>
-    </Navbar>
-  );
+    return (
+        <Navbar bg="light" expand="lg">
+            <Container>
+                <Button variant="outline-light" href="/" className='me-5'>
+                    <img src="../images/Secondhandlogo.png"></img>
+                </Button>
+            </Container>
+        </Navbar>
+    );
 }
 
 export function NavbarInfoProfil() {
-  return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Button variant="outline-light" href="/" className="me-5">
-          <img src="../images/navbar.png"></img>
-        </Button>
-        <Container>
-          <h5 className="text-center">Lengkapi Info Akun</h5>
-          <style jsx>{`
-            .text-center {
-              text-family: "Poppins";
-            }
-          `}</style>
-        </Container>
-      </Container>
-    </Navbar>
-  );
+    return (
+        <Navbar bg="light" expand="lg">
+            <Container>
+                <Button variant="outline-light" href="/" className='me-5'>
+                    <img src="../images/Secondhandlogo.png"></img>
+                </Button>
+                <Container>
+                    <h5 className='text-center'>Lengkapi Info Akun</h5>
+                    <style jsx>{`
+                        .text-center {
+                            text-family: 'Poppins'
+                        }
+                    `}</style>
+                </Container>
+            </Container>
+        </Navbar>
+    );
 }
 
 export function NavbarInfoPenawar() {
@@ -76,7 +76,7 @@ export function NavbarProfile() {
       <Container>
         <Navbar>
           <Button variant="outline-light" href="/" className="me-5">
-            <img src="../images/navbar.png"></img>
+          <img src="../images/Secondhandlogo.png"></img>
           </Button>
           <div className="search-box">
             <input
@@ -176,7 +176,10 @@ export function NavbarProfile() {
                   onClose={() => setShow(false)}
                   show={show}
                 >
-                  <Toast.Body>Jam tangan</Toast.Body>
+                  <Toast.Body>
+                    <img src="../images/image-casio1.png"></img>
+                        Jam tangan cassio Rp.250.000
+                    </Toast.Body>
                 </Toast>
               </div>
               <style jsx>{`
@@ -189,6 +192,12 @@ export function NavbarProfile() {
                   background-color: #ffffff;
                   border-radius: 25px;
                 }
+                .ToastContainer img {
+                  width: 70px;
+                  height: 50px;
+                  border-radius: 10px;
+                  margin-right: 7px;
+              }
               `}</style>
             </div>
             <Button variant="outline-light" href="#">
