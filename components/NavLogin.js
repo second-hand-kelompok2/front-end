@@ -48,21 +48,22 @@ export const NavLogin = () => {
           <div>
             <Link href="/">
               <a>
-                <ListUl className={styles.btnIcon}/>
+                <ListUl className={styles.btnIcon} />
               </a>
             </Link>
 
             <Link href="/">
               <a>
-                <Bell className={styles.btnIcon}/>
+                <Bell className={styles.btnIcon} />
               </a>
             </Link>
 
             <Link href="/">
               <a>
-                <Person className={styles.btnIcon}/>
+                <Person className={styles.btnIcon} />
               </a>
             </Link>
+            
           </div>
         </Container>
       </Navbar>
