@@ -22,18 +22,39 @@ import { Search } from "react-bootstrap-icons";
 // import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import Link from "next/link";
 import { OverlayTrigger, Popover } from "react-bootstrap";
+import API from "../services";
+import axios from "axios";
 
 const user =
   typeof window !== "undefined" ? window.localStorage.getItem("id") : {};
 
 export const NavNoLogin = () => {
   const router = useRouter();
+  const [notif, setNotif] = useState([]);
   const [users, setUsers] = useState({});
 
   useEffect(() => {
     setUsers(user);
     console.log(user);
   }, [user]);
+
+  //memanggil func getproducts
+  useEffect(() => {
+    getNotif();
+  }, []);
+
+  // fetch data api
+  const getNotif = async () => {
+    const userid = window.localStorage.getItem("id");
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1//notification/${userid}`
+      );
+      console.log("res", response.data.data);
+      console.log(userid);
+      setNotif(response.data.data);
+    } catch (err) {}
+  };
 
   const logout = async () => {
     window.localStorage.removeItem("token");
@@ -73,50 +94,54 @@ export const NavNoLogin = () => {
             </Stack>
           )}
       </Row> */}
-      <div className="d-flex notif1">
-        <img src="../images/image-casio1.png"></img>
-        <div>
-          <div className="notif2 d-flex">
-            <div className="me-4">Penawaran produk</div>
-            <div>20 Apr, 14:04</div>
-            <img src="../images/ellipse.png"></img>
-          </div>
-          <div className="notif3">Jam tangan cassio</div>
-          <div className="notif3">Rp.250.000</div>
-          <div className="notif3">Ditawar Rp 200.000</div>
-        </div>
-        <style jsx>{`
-          .notif1 {
-            margin: 10px 0 0 10px;
-          }
-          .notif1 img {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-          }
-          .notif2 {
-            height: 14px;
-            font-family: "Poppins";
-            font-style: normal;
-            font-size: 10px;
-            color: #8a8a8a;
-            margin-left: 10px;
-          }
-          .notif2 img {
-            width: 7px;
-            height: 7px;
-            margin-top: 4px;
-            margin-right: 10px;
-            margin-left: 8px;
-            background: #fa2c5a;
-          }
-          .notif3 {
-            margin-left: 10px;
-          }
-        `}</style>
-      </div>
-      <hr />
-      <div className="d-flex notif1">
+
+      {notif.length == 0
+        ? "loading"
+        : notif.map((a) => (
+            <div className="d-flex notif1">
+              <img src={a.Product.Images[0].product_img}></img>
+              <div>
+                <div className="notif2 d-flex">
+                  <div className="me-4">Penawaran produk</div>
+                  {/* <div>a.</div> */}
+                  {/* <img src="../images/ellipse.png"></img> */}
+                </div>
+                <div className="notif3">{a.Product.product_name}</div>
+                <div className="notif3">Rp.{a.Product.product_price}</div>
+                <div className="notif3">Ditawar Rp {a.req_price}</div>
+              </div>
+              <style jsx>{`
+                .notif1 {
+                  margin: 10px 0 0 10px;
+                }
+                .notif1 img {
+                  width: 48px;
+                  height: 48px;
+                  border-radius: 12px;
+                }
+                .notif2 {
+                  height: 14px;
+                  font-family: "Poppins";
+                  font-style: normal;
+                  font-size: 10px;
+                  color: #8a8a8a;
+                  margin-left: 10px;
+                }
+                .notif2 img {
+                  width: 7px;
+                  height: 7px;
+                  margin-top: 4px;
+                  margin-right: 10px;
+                  margin-left: 8px;
+                  background: #fa2c5a;
+                }
+                .notif3 {
+                  margin-left: 10px;
+                }
+              `}</style>
+            </div>
+          ))}
+      {/* <div className="d-flex notif1">
         <img src="../images/image-casio1.png"></img>
         <div>
           <div className="notif2 d-flex">
@@ -156,7 +181,7 @@ export const NavNoLogin = () => {
             margin-left: 10px;
           }
         `}</style>
-      </div>
+      </div> */}
     </Popover>
   );
 
