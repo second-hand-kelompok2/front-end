@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import API from "../../../services";
 import Images from "../../../components/ProductImages";
+import { NavNoLogin } from "../../../components/NavNoLogin";
 
 const ProductInfo_Seller = () => {
   const router = useRouter();
@@ -66,7 +67,8 @@ const ProductInfo_Seller = () => {
   };
   return (
     <>
-      <NavbarProfile></NavbarProfile>
+      {/* <NavbarProfile></NavbarProfile> */}
+      <NavNoLogin/>
       <div className={style.productInfo}>
         <div className={style.left}>
           <div className={style.top}>

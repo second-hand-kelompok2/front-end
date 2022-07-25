@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { NavbarProfile } from "../../components/navbar";
 import Images from "../../components/ProductImages";
+import { NavNoLogin } from "../../components/NavNoLogin";
 
 const ProductInfo_Buyer = () => {    
   const [product, setProduct] = useState([]);
@@ -78,7 +79,8 @@ const ProductInfo_Buyer = () => {
 
   return (
     <>
-      <NavbarProfile></NavbarProfile>
+      {/* <NavbarProfile></NavbarProfile> */}
+      <NavNoLogin />
 
       <div className={style.productInfo}>
         <div className={style.left}>
