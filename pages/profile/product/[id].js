@@ -51,7 +51,7 @@ const ProductInfo_Seller = () => {
     console.log(router.query.id);
     const response = await API.get(`/product/info/${router.query.id}`);
     console.log(response.data.data[0]);
-    console.log(response.data.data);
+    console.log(router.query.id);
     setProducts(response.data.data[0]);
     setImages(response.data.data[0].Images);
     setUser(response.data.data[0].User);
