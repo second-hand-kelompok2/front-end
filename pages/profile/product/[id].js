@@ -46,10 +46,11 @@ const ProductInfo_Seller = () => {
 
   useEffect(() => {
     getProductById();
+    console.log(user)
   }, []);
   const getProductById = async () => {
     console.log(router.query.id);
-    const response = await API.get(`/product/info/${router.query.id}`);
+    const response = await API.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/product/info/${router.query.id}`);
     console.log(response.data.data[0]);
     console.log(response.data.data);
     setProducts(response.data.data[0]);
