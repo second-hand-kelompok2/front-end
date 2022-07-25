@@ -1,7 +1,7 @@
 import { NavbarProfile } from "../../components/navbar";
 import Card from "../../components/seller/card";
 import CardList from "../../components/seller/cardlist";
-import CardProduct from "../../components/CardProductDiminati";
+// import CardProduct from "../../components/CardProductDiminati";
 import { useEffect, useState } from "react"
 import axios from "axios";
 
