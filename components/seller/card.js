@@ -12,6 +12,7 @@ const Card = (props) => {
       <img
         src={props.props.Product.Images[0].product_img}
         className="card-img-top"
+        style={{ height: 170 }}
         alt="..."
       ></img>
       <Link href={`/product/${props.props.Product.id}`}>
