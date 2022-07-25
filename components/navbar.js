@@ -84,16 +84,11 @@ export function NavbarProfile() {
               <img
                 src={`https://secondhand-catchy.herokuapp.com/api/v1/notification/:userid}`}
                 alt=""
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  objectFit: "cover",
-                  borderRadius: "12px",
-                }}
+                className="d-flex notif1"
               />
               <Stack>
-                <p className="m-0 text-black-50">{postStatus}</p>
-                <p className="m-0 fw-bold text-black">{post.name}</p>
+                <p className="notif2 d-flex">{postStatus}</p>
+                <p className="notif3">{post.name}</p>
               </Stack>
               <p className="ms-auto fw-bold text-black">{post.createdAt}</p>
             </Stack>
