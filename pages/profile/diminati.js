@@ -6,6 +6,11 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import { NavNoLogin } from "../../components/NavNoLogin";
 
+const user =
+  typeof window !== "undefined"
+    ? JSON.parse(window.localStorage.getItem("user"))
+    : {};
+
 const Diminati = () => {
   //   const contentStyle = {
   //     minHeight: "90vh",
@@ -15,11 +20,17 @@ const Diminati = () => {
   //   };
 
   const [list, setList] = useState([])
+  const [users, setUsers] = useState({});
 
   useEffect(() => {
     getList()
     // console.log(list)
   })
+
+  useEffect(() => {
+    setUsers(user);
+    console.log(user);
+  }, [user]);
 
   const getList = async () => {
     try {
@@ -55,7 +66,7 @@ const Diminati = () => {
               <div className="profile-card border border-3 rounded">
                 <div className="profile-img d-inline">
                   <img
-                    src="../images/image-casio1.png"
+                    src={users?.profile_img}
                     width="50"
                     height="50"
                     className="rounded"
@@ -63,9 +74,9 @@ const Diminati = () => {
                   ></img>
                 </div>
                 <div className="profile-name d-inline">
-                  Nama Penjual
+                {users?.name}
                   <br />
-                  <font className="profile-kota ">Kota</font>
+                  <font className="profile-kota ">{users?.city}</font>
                 </div>
                 <div className="profile-button d-inline float-end mt-2">
                   <button type="button" className="btn btn-outline-dark" href="#">
