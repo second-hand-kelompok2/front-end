@@ -1,6 +1,9 @@
 import { NavbarProfile } from "../../components/navbar";
 import Card from "../../components/seller/card";
 import CardList from "../../components/seller/cardlist";
+import CardProduct from "../../components/CardProduct";
+import { useEffect, useState } from "react"
+import axios from "axios";
 
 const Diminati = () => {
   //   const contentStyle = {
@@ -9,6 +12,32 @@ const Diminati = () => {
   //     backgroundColor: "#f1f1f9",
   //     overflowX: "hidden",
   //   };
+
+  const [list, setList] = useState([])
+
+  useEffect(() => {
+    getList()
+    // console.log(list)
+  })
+
+  const getList = async () => {
+    try {
+      const id = window.localStorage.getItem("id")
+      const token = window.localStorage.getItem("token");
+
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/wishlist/${id}`, {
+        headers: {
+          token: token
+        }
+      })
+      setList(response.data.data)
+      console.log("Berhasil ambil data")
+    }
+
+    catch(err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div>
@@ -102,10 +131,11 @@ const Diminati = () => {
           </div>
           <div>
             <div className="wishlist">
-              <img src="../images/diminati.png" />
+              {/* <img src="../images/diminati.png" />
               <p>
                 Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok
-              </p>
+              </p> */}
+              {list.map((item) => <Card key={item.id} props={item}></Card>) }
             </div>
             <style jsx>{`
               .wishlist {
