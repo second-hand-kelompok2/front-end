@@ -9,60 +9,7 @@ import Images from "../../../components/ProductImages";
 
 const ProductInfo_Seller = () => {
   const router = useRouter();
-  // const [product, setProduct] = useState([]);
-  const [images, setImages] = useState([]);
-  const [smallImage, setSmallImage] = useState([]);
-  const [user, setUser] = useState("");
-  const [userImage, setUserImage] = useState("");
 
-  // useEffect(() => {
-  //   getProduct();
-  // }, []);
-
-  // const getProduct = async () => {
-  //   try {
-  //     const response = await  API.get(`/product/info/${router.query.id}`);
-  //     setProduct(response.data.data[0]);
-  //     setUser(response.data.data[0].User);
-  //     setUserImage(response.data.data[0].User.profile_img);
-  //     setImages(response.data.data[0].Images);
-  //     setSmallImage(response.data.data[0].Images[0].product_img);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // const [displayClass, setDisplayClass] = useState(style.popupHide);
-
-  // const changeDisplay = () => {
-  //   if (displayClass == style.popupHide) {
-  //     setDisplayClass(style.popupDisplay);
-  //   } else {
-  //     setDisplayClass(style.popupHide);
-  //   }
-  // };
-  const [products, setProducts] = useState([]);
-  // const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    getProductById();
-  }, []);
-  const getProductById = async () => {
-    console.log(router.query.id);
-    const response = await API.get(`/product/info/${router.query.id}`);
-    console.log(response.data.data[0]);
-    console.log(router.query.id);
-    setProducts(response.data.data[0]);
-    setImages(response.data.data[0].Images);
-    setUser(response.data.data[0].User);
-    setUserImage(response.data.data[0].User.profile_img);
-    //     setUserImage(response.data.data[0].User.profile_img);
-    // setFileInputState(response.data.data[0].Images);
-    // setName(response.data.data[0].product_name);
-    // setCategory(response.data.data[0].product_category);
-    // setDesc(response.data.data[0].product_desc);
-    // setPrice(response.data.data[0].product_price);
-  };
   return (
     <>
       <NavbarProfile></NavbarProfile>
