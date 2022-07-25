@@ -51,15 +51,24 @@ function Profile() {
   const handleSubmitFile = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    const token = window.localStorage.getItem("token");
     formData.append("name", name);
+    // Object.values(fileInputState).forEach((file) => {
+    //   formData.append("profile_img", fileInputState);
+    // });
     formData.append("profile_img", fileInputState);
     formData.append("phone", phone);
     formData.append("city", city);
     formData.append("address", address);
-
     try {
       console.log("kata", formData);
-      await API.post(`/users/profile/update/${router.query.id}`, formData);
+      await API.post(`/users/profile/update/${router.query.id}`, formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: token,
+        },
+      });
       router.push("/profile");
       console.log("success");
     } catch (error) {
