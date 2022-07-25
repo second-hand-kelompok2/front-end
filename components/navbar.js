@@ -7,6 +7,7 @@ import Toast from "react-bootstrap/Toast";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { OverlayTrigger, Popover } from "react-bootstrap";
+import Link from "next/link";
 
 export function NavbarDefault() {
   return (
@@ -81,23 +82,24 @@ export function NavbarProfile() {
           .map((post) => (
             <Stack direction="horizontal" gap={3}>
               <img
-                src={`http://localhost:2000/public/files/${post.picture}`}
+                src={`https://secondhand-catchy.herokuapp.com/api/v1/notification/:userid}`}
                 alt=""
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  objectFit: "cover",
-                  borderRadius: "12px",
-                }}
+                className="d-flex notif1"
               />
               <Stack>
-                <p className="m-0 text-black-50">{postStatus}</p>
-                <p className="m-0 fw-bold text-black">{post.name}</p>
+                <p className="notif2 d-flex">{postStatus}</p>
+                <p className="notif3">{post.name}</p>
               </Stack>
               <p className="ms-auto fw-bold text-black">{post.createdAt}</p>
             </Stack>
           ))
-          .reverse()}
+          .reverse(
+            <Stack direction="horizontal" gap={3}>
+              <div className="text-center">
+                Whoops! You have no notifications.
+              </div>
+            </Stack>
+          )}
       </Row> */}
       <div className="d-flex notif1">
         <img src="../images/image-casio1.png"></img>
@@ -291,9 +293,11 @@ export function NavbarProfile() {
                 </Button>
               </OverlayTrigger>
             </div>
-            <Button variant="outline-light" href="#">
-              <img src="../images/fi_user.png"></img>
-            </Button>
+            <Link href={"/profile"}>
+              <Button variant="outline-light" href="#">
+                <img src="../images/fi_user.png"></img>
+              </Button>
+            </Link>
           </ButtonGroup>
           <Button className={styles.btn} onClick={logout}>
             <p className={styles.txt}>Logout</p>
