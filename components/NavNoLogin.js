@@ -21,6 +21,7 @@ import { Search } from "react-bootstrap-icons";
 // import { CheckLg } from "react-bootstrap-icons";
 // import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import Link from "next/link";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 
 const user =
   typeof window !== "undefined" ? window.localStorage.getItem("id") : {};
@@ -44,6 +45,120 @@ export const NavNoLogin = () => {
   const [show, setShow] = useState(true);
 
   const toggleShow = () => setShow(!show);
+
+  const popoverClick = (
+    <Popover id="popover-trigger-click" title="Popover bottom">
+      {/* <Row>
+        {post
+          .slice(0, 3)
+          .map((post) => (
+            <Stack direction="horizontal" gap={3}>
+              <img
+                src={`http://localhost:2000/public/files/${post.picture}`}
+                alt=""
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                }}
+              />
+              <Stack>
+                <p className="m-0 text-black-50">{postStatus}</p>
+                <p className="m-0 fw-bold text-black">{post.name}</p>
+              </Stack>
+              <p className="ms-auto fw-bold text-black">{post.createdAt}</p>
+            </Stack>
+          ))
+          .reverse()}
+      </Row> */}
+      <div className="d-flex notif1">
+        <img src="../images/image-casio1.png"></img>
+        <div>
+          <div className="notif2 d-flex">
+            <div className="me-4">Penawaran produk</div>
+            <div>20 Apr, 14:04</div>
+            <img src="../images/ellipse.png"></img>
+          </div>
+          <div className="notif3">Jam tangan cassio</div>
+          <div className="notif3">Rp.250.000</div>
+          <div className="notif3">Ditawar Rp 200.000</div>
+        </div>
+        <style jsx>{`
+          .notif1 {
+            margin: 10px 0 0 10px;
+          }
+          .notif1 img {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+          }
+          .notif2 {
+            height: 14px;
+            font-family: "Poppins";
+            font-style: normal;
+            font-size: 10px;
+            color: #8a8a8a;
+            margin-left: 10px;
+          }
+          .notif2 img {
+            width: 7px;
+            height: 7px;
+            margin-top: 4px;
+            margin-right: 10px;
+            margin-left: 8px;
+            background: #fa2c5a;
+          }
+          .notif3 {
+            margin-left: 10px;
+          }
+        `}</style>
+      </div>
+      <hr />
+      <div className="d-flex notif1">
+        <img src="../images/image-casio1.png"></img>
+        <div>
+          <div className="notif2 d-flex">
+            <div className="me-3">Berhasil di terbitkan</div>
+            <div>19 Apr, 12:00</div>
+            <img src="../images/ellipse.png"></img>
+          </div>
+          <div className="notif3">Jam tangan cassio</div>
+          <div className="notif3 mb-3">Rp.250.000</div>
+        </div>
+        <style jsx>{`
+          .notif1 {
+            margin: 10px 0 0 10px;
+          }
+          .notif1 img {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+          }
+          .notif2 {
+            height: 14px;
+            font-family: "Poppins";
+            font-style: normal;
+            font-size: 10px;
+            color: #8a8a8a;
+            margin-left: 10px;
+          }
+          .notif2 img {
+            width: 7px;
+            height: 7px;
+            margin-top: 4px;
+            margin-right: 6px;
+            margin-left: 8px;
+            background: #fa2c5a;
+          }
+          .notif3 {
+            margin-left: 10px;
+          }
+        `}</style>
+      </div>
+    </Popover>
+  );
+
   return (
     <>
       <Navbar className={styles.header} expand="lg">
@@ -70,29 +185,15 @@ export const NavNoLogin = () => {
                   <img src="../images/fi_list.png"></img>
                 </Button>
                 <div>
-                  <Button variant="outline-light" onClick={toggleShow}>
-                    <img src="../images/fi_bell.png"></img>
-                  </Button>
-                  <div className="ToastContainer">
-                    <Toast
-                      className="Toast"
-                      onClose={() => setShow(false)}
-                      show={show}
-                    >
-                      <Toast.Body>Jam tangan</Toast.Body>
-                    </Toast>
-                  </div>
-                  <style jsx>{`
-                    .ToastContainer {
-                      max-width: 500px;
-                      position: absolute;
-                      margin-left: -300px;
-                    }
-                    .Toast {
-                      background-color: #ffffff;
-                      border-radius: 25px;
-                    }
-                  `}</style>
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="bottom"
+                    overlay={popoverClick}
+                  >
+                    <Button variant="outline-light">
+                      <img src="../images/fi_bell.png" className="icon"></img>
+                    </Button>
+                  </OverlayTrigger>
                 </div>
                 <Link href={"/profile"}>
                   <Button variant="outline-light" href="#">
