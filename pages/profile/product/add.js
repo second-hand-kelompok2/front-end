@@ -5,6 +5,8 @@ import { Form } from "react-bootstrap";
 import Link from "next/link";
 // import _ from "lodash";
 
+//
+
 const Add = () => {
   const router = useRouter();
   const [name, setName] = useState("");
@@ -15,6 +17,8 @@ const Add = () => {
 
   const [fileInputState, setFileInputState] = useState([]);
   const [previewSource, setPreviewSource] = useState([]);
+
+  const [users, setUsers] = useState({});
 
   const handleFileInputChange = (e) => {
     const { files } = e.target;
@@ -63,6 +67,7 @@ const Add = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("product_name", name);
+    // formData.append("user_id", users);
     formData.append("product_category", category);
     formData.append("product_desc", desc);
     formData.append("product_price", price);
@@ -165,80 +170,6 @@ const Add = () => {
                 </div>
               </div>
               <div className="row">
-                {/* <SingleUploader/> */}
-                <div className="d-flex">
-                  <label className="form-label-foto" for="foto_produk">
-                    Foto Produk
-                    <br />
-                    <a class="btn-img" rel="nofollow">
-                      +
-                    </a>
-                  </label>
-                  <div>
-                    <input
-                      className="form_input"
-                      type="text"
-                      id="nama_produk"
-                      name="nama_produk"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Nama Produk"
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <label className="form-label" for="harga_produk">
-                    Harga Produk
-                  </label>
-                  <div>
-                    <input
-                      className="form_input"
-                      type="text"
-                      id="harga_produk"
-                      name="harga_produk"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                      placeholder="Rp 0.00"
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <label className="form-label" for="kategori">
-                    Kategori
-                  </label>
-                  <div>
-                    <select
-                      class="form-select"
-                      name="kategori"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                    >
-                      <option selected hidden>
-                        Pilih Kategori
-                      </option>
-                      <option value="Kendaraan">Kendaraan</option>
-                      <option value="Aksesoris">Aksesoris</option>
-                      <option value="Furniture">Furniture</option>
-                      <option value="Fashion">Fashion</option>
-                      <option value="Elektronik">Elektronik</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row">
-                  <label className="form-label" for="deskripsi">
-                    Deskripsi
-                  </label>
-                  <div>
-                    <textarea
-                      className="form_input form-control"
-                      id="deskripsi"
-                      name="deskripsi"
-                      value={desc}
-                      onChange={(e) => setDesc(e.target.value)}
-                      placeholder="Contoh : Ikan Hiu 33"
-                    />
-                  </div>
-                </div>
                 <div className="row">
                   {/* <SingleUploader/> */}
                   <div className="d-flex">
