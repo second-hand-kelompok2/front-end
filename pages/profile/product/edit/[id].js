@@ -85,12 +85,8 @@ const Edit = () => {
     const token = window.localStorage.getItem("token");
 
     try {
-      await API.post(`/product/update/${router.query.id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          token: token,
-        },
-      });
+      await API.post(`/product/update/${router.query.id}`, formData
+      );
       router.push({ pathname: "/profile" });
     } catch (error) {
       console.log(error);
