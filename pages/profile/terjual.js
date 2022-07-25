@@ -3,6 +3,7 @@ import Card from "../../components/seller/card";
 import CardList from "../../components/seller/cardlist";
 import { useEffect, useState } from "react"
 import axios from "axios";
+import { NavNoLogin } from "../../components/NavNoLogin";
 
 const Terjual = () => {
   //   const contentStyle = {
@@ -40,7 +41,8 @@ const Terjual = () => {
 
   return (
     <div>
-      <NavbarProfile></NavbarProfile>
+      {/* <NavbarProfile /> */}
+      <NavNoLogin/>
       {/* <Header /> */}
       <div id="daftarjual" className="container content position-relative">
         <div className="row">

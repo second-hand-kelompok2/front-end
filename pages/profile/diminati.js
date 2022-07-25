@@ -4,6 +4,7 @@ import CardList from "../../components/seller/cardlist";
 // import CardProduct from "../../components/CardProductDiminati";
 import { useEffect, useState } from "react"
 import axios from "axios";
+import { NavNoLogin } from "../../components/NavNoLogin";
 
 const Diminati = () => {
   //   const contentStyle = {
@@ -41,7 +42,8 @@ const Diminati = () => {
 
   return (
     <div>
-      <NavbarProfile></NavbarProfile>
+      {/* <NavbarProfile></NavbarProfile> */}
+      <NavNoLogin/>
       {/* <Header /> */}
       <div id="daftarjual" className="container content position-relative">
         <div className="row">
