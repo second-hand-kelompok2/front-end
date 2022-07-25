@@ -47,7 +47,7 @@ const ProductInfo_Buyer = () => {
     e.preventDefault()
     // const buyerId = 1;
     const buyerId = window.localStorage.getItem("id")
-    const sllerId = user.id;
+    const sllerId = product.user_id;
     const product_id = router.query.id;
     const token = window.localStorage.getItem("token");
 

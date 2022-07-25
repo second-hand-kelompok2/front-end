@@ -1,7 +1,7 @@
 import { NavbarProfile } from "../../components/navbar";
 import Card from "../../components/seller/card";
 import CardList from "../../components/seller/cardlist";
-import CardProduct from "../../components/CardProduct";
+import CardProduct from "../../components/CardProductDiminati";
 import { useEffect, useState } from "react"
 import axios from "axios";
 
@@ -131,21 +131,9 @@ const Diminati = () => {
           </div>
           <div>
             <div className="wishlist">
-              {/* <img src="../images/diminati.png" />
-              <p>
-                Belum ada produkmu yang diminati nih, sabar ya rejeki nggak kemana kok
-              </p> */}
               {list.map((item) => <Card key={item.id} props={item}></Card>) }
+              {/* {list.map((item) => <CardProduct key={item.id} props={item}></CardProduct>) } */}
             </div>
-            <style jsx>{`
-              .wishlist {
-                text-align: center;
-                flex-direction: row;
-                justify-content: space-between;
-                width: 40%;
-                margin-left: 230px;
-              }
-            `}</style>
           </div>
         </div>
       </div>

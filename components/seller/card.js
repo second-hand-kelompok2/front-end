@@ -16,10 +16,12 @@ const Card = (props) => {
       ></img> */}
       <Link href={`/product/${props.props.Product.id}`}>
       <div className="card-body">
-        <p className="card-text name-p">{props.props.Product.product_name}</p>
-        <p className="card-text kind-p">({props.props.Product.product_category})</p>
+        <p className="card-text name-p"><b>{props.props.Product.product_name}</b></p>
+        {/* <p className="card-text kind-p">({props.props.Product.product_category})</p> */}
+        <br />
         <p className="card-text price-p"> Harga produk: {props.props.Product.product_price}</p>
         <p className="card-text price-p"> Harga tawar: {props.props.req_price}</p>
+        <p className="card-text price-p"> Status: {props.props.status}</p>
       </div>
       </Link>
     </div>
