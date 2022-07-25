@@ -9,20 +9,28 @@ const Card = (props) => {
         <p className="card-text type-p">{product.product_type}</p>
         <p className="card-text price-p">{product.product_price}</p>
       </div> */}
-      {/* <img
-        src="images/image-casio1.png"
+      <img
+        src={props.props.Product.Images[0].product_img}
         className="card-img-top"
         alt="..."
-      ></img> */}
+      ></img>
       <Link href={`/product/${props.props.Product.id}`}>
-      <div className="card-body">
-        <p className="card-text name-p"><b>{props.props.Product.product_name}</b></p>
-        {/* <p className="card-text kind-p">({props.props.Product.product_category})</p> */}
-        <br />
-        <p className="card-text price-p"> Harga produk: {props.props.Product.product_price}</p>
-        <p className="card-text price-p"> Harga tawar: {props.props.req_price}</p>
-        <p className="card-text price-p"> Status: {props.props.status}</p>
-      </div>
+        <div className="card-body">
+          <p className="card-text name-p">
+            <b>{props.props.Product.product_name}</b>
+          </p>
+          {/* <p className="card-text kind-p">({props.props.Product.product_category})</p> */}
+          <br />
+          <p className="card-text price-p">
+            {" "}
+            Harga produk: {props.props.Product.product_price}
+          </p>
+          <p className="card-text price-p">
+            {" "}
+            Harga tawar: {props.props.req_price}
+          </p>
+          <p className="card-text price-p"> Status: {props.props.status}</p>
+        </div>
       </Link>
     </div>
   );
