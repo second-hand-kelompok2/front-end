@@ -87,7 +87,7 @@ export function NavbarProfile() {
                 className="d-flex notif1"
               />
               <Stack>
-                <p className="notif2 d-flex">{postStatus}</p>
+                <p className="notif2 d-flex">{post.message}</p>
                 <p className="notif3">{post.name}</p>
               </Stack>
               <p className="ms-auto fw-bold text-black">{post.createdAt}</p>
