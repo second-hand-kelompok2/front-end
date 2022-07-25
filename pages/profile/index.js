@@ -31,9 +31,9 @@ const DaftarJual = () => {
 
   // fetch data api
   const getProducts = async () => {
-    // const userid = window.localStorage.getItem("id");
+    const userid = window.localStorage.getItem("id");
     try {
-      const response = await API.get(`/product/${users?.id}`);
+      const response = await API.get(`/product/${userid}`);
       console.log(response.data.data);
       console.log(userid);
       setProducts(response.data.data);
@@ -52,7 +52,7 @@ const DaftarJual = () => {
   return (
     <div>
       {/* <Header /> */}
-      <NavbarProfile/>
+      <NavbarProfile />
       <div id="daftarjual" className="container content position-relative">
         <div className="row">
           <div className="col-12 d-flex mb-3">
@@ -112,7 +112,8 @@ const DaftarJual = () => {
                 <p className="kategori card-text fw-bold">Kategori</p>
                 <p className="semua-prod card-text">
                   <a className="active" href="/profile">
-                    Semua Produk <i className="icon-gt fw-bold float-end">&gt;</i>
+                    Semua Produk{" "}
+                    <i className="icon-gt fw-bold float-end">&gt;</i>
                   </a>
                 </p>
                 <hr />
@@ -129,15 +130,15 @@ const DaftarJual = () => {
                 </p>
                 <style jsx>{`
                   /* Style the buttons */
-                  .active{
+                  .active {
                     text-decoration: none;
                     color: blueviolet;
                   }
-                  .active:hover{
+                  .active:hover {
                     color: black;
                   }
                   /* Style the active class (and buttons on mouse-over) */
-                  .buton{
+                  .buton {
                     color: black;
                     text-decoration: none;
                   }
@@ -160,8 +161,9 @@ const DaftarJual = () => {
                 </button>
               </Link>
             </div>
-            {products
-              ? products.map((product) => (
+            {products.length == 0
+              ? "loading"
+              : products.map((product) => (
                   <div className="card-item" key={product.id}>
                     <a
                       className="cardlink"
@@ -175,6 +177,7 @@ const DaftarJual = () => {
                         <img
                           src={product.Images[0].product_img}
                           className="card-img-top"
+                          style={{ height: 170 }}
                           alt="..."
                         ></img>
                         <div className="card-body">
@@ -191,8 +194,7 @@ const DaftarJual = () => {
                       </div>
                     </a>
                   </div>
-                ))
-              : "empty"}
+                ))}
           </div>
         </div>
       </div>
