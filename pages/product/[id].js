@@ -28,9 +28,6 @@ const ProductInfo_Buyer = () => {
       setUserImage(response.data.data[0].User.profile_img);
       setImages(response.data.data[0].Images);
       setSmallImage(response.data.data[0].Images[0].product_img);
-      // console.log('Data: ', response.data.data[0])
-      // console.log('Images: ', response.data.data[0].Images[0])
-      // console.log(router.query.id)
     } catch (err) {
       console.log(err);
     }
@@ -45,6 +42,39 @@ const ProductInfo_Buyer = () => {
       setDisplayClass(style.popupHide);
     }
   };
+
+  const handleSubmit = async (e, req_price) => {
+    e.preventDefault()
+    // const buyerId = 1;
+    const buyerId = window.localStorage.getItem("id")
+    const sllerId = user.id;
+    const product_id = router.query.id;
+    const token = window.localStorage.getItem("token");
+
+    console.log(req_price, buyerId, sllerId)
+
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/transaction/create`, {
+        buyerId,
+        sllerId,
+        product_id,
+        req_price
+      }, {
+        headers: {
+          token: token,
+        }
+      })
+
+      console.log("Berhasil kirim")
+      console.log(response)
+    }
+
+    catch(err) {
+      console.log(err)
+    }
+    
+    changeDisplay()
+  }
 
   return (
     <>
@@ -118,9 +148,9 @@ const ProductInfo_Buyer = () => {
 
               <h3>Harga Tawar</h3>
               <form action="/" method="POST">
-                <input type="number" placeholder="Rp 0,00" required />
+                <input id='hargaTawar' type="number" placeholder="Rp 0,00" required />
               </form>
-              <button type="button" className={style.btnPurple}>
+              <button onClick={(event) => handleSubmit(event, document.getElementById('hargaTawar').value)} type="button" className={style.btnPurple}>
                 Kirim
               </button>
             </div>
