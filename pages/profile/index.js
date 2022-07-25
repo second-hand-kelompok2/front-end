@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import API from "../../services";
 import { NavbarProfile } from "../../components/navbar";
+import { NavNoLogin } from "../../components/NavNoLogin";
 
 const user =
   typeof window !== "undefined"
@@ -52,7 +53,8 @@ const DaftarJual = () => {
   return (
     <div>
       {/* <Header /> */}
-      <NavbarProfile />
+      {/* <NavbarProfile /> */}
+      <NavNoLogin />
       <div id="daftarjual" className="container content position-relative">
         <div className="row">
           <div className="col-12 d-flex mb-3">
